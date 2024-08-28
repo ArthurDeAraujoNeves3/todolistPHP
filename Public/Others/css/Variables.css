@@ -5,6 +5,8 @@
     --bg: black;
     --text: #202020;
     --subTitle: #757575;
+    --error: #ff0800;
+    --errorBoxShadow: rgb(255, 8, 0, .5);
     --InputFocus: rgb(220, 76, 62, .5);
 
     --rounded: 8px;

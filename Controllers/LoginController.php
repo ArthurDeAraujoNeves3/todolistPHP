@@ -8,10 +8,14 @@ class LoginController extends Controller
 		//verifico se o usuário já está logado
 		$user = new Users();
 		if ($user->isLogged() == true) {
-			header("Location: " . BASE_URL . "Admin");
+
+			header("Location: " . BASE_URL . "Home");
+
 		} else {
 			//caso não esteja tentamos fazer o login
 			$data = array();
+
+			$emailRegex = "";
 
 			//pegamos os dados enviados via post e usamos o sanitize
 			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);

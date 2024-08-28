@@ -7,12 +7,12 @@
 	<link rel="stylesheet" href="<?php echo BASE_URL . '/Public/Bootstrap/bootstrap.min.css' ?>">
 	<link rel="stylesheet" href="<?php echo BASE_URL . '/Public/index.css' ?>">
 	<link rel="stylesheet" href="<?php echo BASE_URL . '/Public/styles/LoginStyle.css' ?>">
-	<title>Login | todoist</title>
+	<title>Fazer login no Todoist</title>
 </head>
 
 <body class="bgLight">
 
-	<header class="container">
+	<header>
 
 		<nav class="navbar bg-body-tertiary">
 
@@ -29,6 +29,7 @@
 		</nav>
 
 	</header>
+
 	<main class="container d-flex align-items-center justify-content-lg-between justify-content-center mt-5">
 
 		<section class="d-flex flex-column gap-3 Form">

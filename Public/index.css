@@ -48,6 +48,17 @@ button[type=submit] {
     border-radius: var(--rounded);
 
 }
+button[type=submit]:hover {
+
+    border-color: var(--theme);
+    
+}
+button[type=submit]:focus {
+
+    border-color: var(--error) !important;
+    box-shadow:0 0 0 .25rem var(--errorBoxShadow) !important;
+
+}
 input:focus {
 
     border-color: var(--theme) !important;
@@ -78,3 +89,26 @@ a:hover {
 
 }
 
+.InputError {
+
+    border-color: var(--error) !important;
+
+}
+.InputError::placeholder {
+
+    color: var(--error);
+    
+}
+.InputError:focus {
+
+    border-color: var(--error) !important;
+    box-shadow:0 0 0 .25rem var(--errorBoxShadow) !important;
+
+}
+
+.InputAlert {
+
+    color: var(--error);
+    font-size: 13px;
+
+}

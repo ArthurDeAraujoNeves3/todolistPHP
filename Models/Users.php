@@ -32,7 +32,7 @@ Class Users extends Model{
 	}
 
 	public function verifyEmail($email){
-		$sql = $this->db->prepare("SELECT id FROM users WHERE email = :email AND situation = '1'");
+		$sql = $this->db->prepare("SELECT id FROM users WHERE email = :email");
 		$sql->bindValue(":email", $email);
 		$sql->execute();
 
@@ -106,12 +106,12 @@ Class Users extends Model{
 
 	}
 
-	public function addUser($name, $email, $type_user, $id_group){
-		$sql = $this->db->prepare("INSERT INTO users SET name = :name, email = :email, type = :type_user, id_group = :id_group, situation = '1'");
+	public function addUser($name, $email, $password, $id){
+		$sql = $this->db->prepare("INSERT INTO users SET name = :name, email = :email, password = :password, id = :id");
 		$sql->bindValue(":name", $name);
 		$sql->bindValue(":email", $email);
-		$sql->bindValue(":type_user", $type_user);
-		$sql->bindValue(":id_group", $id_group);
+		$sql->bindValue(":password", $password);
+		$sql->bindValue(":id", $id);
 		$sql->execute();
 
 		return $this->db->lastInsertId();

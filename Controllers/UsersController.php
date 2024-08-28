@@ -17,9 +17,6 @@ class UsersController extends Controller
 
     public function index($success = null)
     {
-        $this->data['title'] = "Quality Juá";
-        $this->data['nivel-1'] = 'Configurações';
-        $this->data['nivel-2'] = "Usuarios";
 
         $users = new Users();
         $users->setLoggeduser();

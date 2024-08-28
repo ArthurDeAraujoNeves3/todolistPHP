@@ -13,13 +13,13 @@
 @font-face {
 
     font-family: "Title";
-    src: url("./fonts/Title/");
+    src: url("./fonts/Title/Poppins-SemiBold.ttf");
 
 }
 @font-face {
 
     font-family: "Text";
-    src: url("./fonts/Text/");
+    src: url("./fonts/Text/Poppins-Regular.ttf");
 
 }
 
@@ -32,12 +32,41 @@ body{
 
 }
 
+/* Classes do Bootstrap */
+.container {
+
+    max-width: 100%;
+    width: 1000px !important;
+    padding: 0px 40px;
+
+}
+button[type=submit] {
+
+    width: 100%;
+    background-color: var(--theme) !important;
+    border-color: var(--theme);
+    border-radius: var(--rounded);
+
+}
+input:focus {
+
+    border-color: var(--theme) !important;
+    box-shadow:0 0 0 .25rem var(--InputFocus) !important;
+
+}
+
+/* Apenas para as telas de Login e Cadastro */
 .bgLight {
 
     background-color: white;
 
 }
 
+h1 {
+
+    font-family: "Title";
+
+}
 a {
 
     color: var(--text);
@@ -49,11 +78,3 @@ a:hover {
 
 }
 
-button[type=submit] {
-
-    width: 100%;
-    background-color: var(--theme) !important;
-    border-color: var(--theme);
-    border-radius: var(--rounded);
-
-}

@@ -29,7 +29,7 @@
 		</nav>
 
 	</header>
-	<main class="container d-flex align-items-center justify-content-between mt-5">
+	<main class="container d-flex align-items-center justify-content-lg-between justify-content-center mt-5">
 
 		<section class="d-flex flex-column gap-3 Form">
 
@@ -40,12 +40,6 @@
 				<form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
 
 					<section class="d-flex flex-column">
-
-						<div class="input-group mb-3">
-
-							<input name="name" id="name" maxlength="128" type="text" class="form-control" placeholder="Seu nome" aria-label="Email" aria-describedby="basic-addon1">
-
-						</div> <!--Nome do usuário-->
 
 						<div class="input-group mb-3">
 
@@ -69,15 +63,15 @@
 
 			<hr>
 
-			<p class="text-center">Já se cadastrou? <a href="<?php echo BASE_URL . "Register" ?>" class="text-decoration-underline">Vá para o login</a></p>
+			<p class="text-center">Não tem uma conta? <a href="<?php echo BASE_URL . "Register"?>" class="text-decoration-underline">Cadastre-se</a></p>
 
 		</section> <!--Form-->
 
-		<section class="Video">
+		<section class="d-lg-flex d-none Video">
 
-			<video playsinline="" poster="https://todoist.b-cdn.net/assets/images/7b55dafbc1fe203bd537c738fb1757ed.png"><source src="https://todoist.b-cdn.net/assets/video/69a00ecf3b2aedf11010987593926c2e.mp4" type="video/mp4"></video>
+			<img src="<?php echo BASE_URL . '/Public/assets/img/Login.png' ?>" class="img-fluid" />
 
-		</section> <!--Video-->
+		</section> <!--Imagem-->
 
 	</main>
 

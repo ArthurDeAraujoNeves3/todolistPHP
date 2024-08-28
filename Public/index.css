@@ -1,4 +1,4 @@
-@import "./Variables.css";
+@import "./Others/css/Variables.css";
 
 /* Reset das configurações padrões */
 * {
@@ -32,4 +32,28 @@ body{
 
 }
 
+.bgLight {
 
+    background-color: white;
+
+}
+
+a {
+
+    color: var(--text);
+
+}
+a:hover {
+
+    color: var(--text);
+
+}
+
+button[type=submit] {
+
+    width: 100%;
+    background-color: var(--theme) !important;
+    border-color: var(--theme);
+    border-radius: var(--rounded);
+
+}

@@ -1,0 +1,35 @@
+@import "./Variables.css";
+
+/* Reset das configurações padrões */
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+
+}
+
+@font-face {
+
+    font-family: "Title";
+    src: url("./fonts/Title/");
+
+}
+@font-face {
+
+    font-family: "Text";
+    src: url("./fonts/Text/");
+
+}
+
+body{
+    
+    background-color: var(--bg);
+    font-family: "Text";
+    color: var(--text);
+    overflow-x: hidden;
+
+}
+
+

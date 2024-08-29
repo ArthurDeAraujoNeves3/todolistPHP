@@ -31,7 +31,7 @@ function verifyInput() {
 
     validateInput(name, name.value !== "" && name.value.length <= 126);
     validateInput(email, email.value !== "" && emailRegex.test(email.value));
-    validateInput(password, password.value !== "" && password.value.length <= 126);
+    validateInput(password, password.value !== "" && password.value.length >= 8 && password.value.length <= 126);
 
     if ( document.querySelectorAll(".InputError").length > 0 ) {
 

@@ -94,7 +94,7 @@
 
     </main>
 
-    <script src="<?php echo BASE_URL . '/Public/scripts/js/Forms/validateInput.js' ?>"></script>
+    <script src="<?php echo BASE_URL . '/Public/scripts/js/Forms/validateInputRegister.js' ?>"></script>
 
 </body>
 

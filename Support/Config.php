@@ -70,7 +70,7 @@ if(ENVIRONMENT == 'development'){
 	/**
 	 * SESSION 
 	 */
-	define("CONF_SESSION_NAME", "quality_process_test");
+	define("CONF_SESSION_NAME", "userId");
 
 
 } else{

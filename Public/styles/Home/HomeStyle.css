@@ -1,0 +1,71 @@
+@import "../../Others/css/Variables.css";
+
+.Header {
+
+    height: 50px;
+
+}
+
+.UserIcon {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    background-color: var(--text2);
+    border-radius: 999px;
+    font-size: 15px;
+
+}
+
+/*Botão de adição de tarefas*/
+.AddButton > div {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    transition: 0.2s;
+
+}
+.AddButton:hover {
+
+    cursor: pointer;
+
+}
+.AddButton:hover > div {
+
+    background-color: var(--theme);
+
+}
+/*Ícone*/
+.AddButton:hover > div > i {
+
+    color: white !important;
+
+}
+.AddButton:hover > p {
+
+    transition: 0.2s;
+    color: var(--theme);
+
+}
+
+.NoProjects {
+
+    width: 300px;
+    
+}
+.NoProjects > img {
+
+    width: 250px;
+
+}
+.NoProjects > .SubTitulo {
+
+    font-size: 14px;
+
+}

@@ -6,13 +6,16 @@ class HomeController extends Controller {
 
     public function index() {
 
+        //var_dump($_SESSION);
+        
         if ( !$_SESSION[CONF_SESSION_NAME] ) {
 
             header("location: ".BASE_URL."Login");
+            exit();
 
         } else {
 
-            $this->loadTemplateSite('Home/index', $this->data);
+            $this->loadView('Home/index', $this->data);
 
         };
 

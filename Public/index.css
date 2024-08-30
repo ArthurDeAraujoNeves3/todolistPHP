@@ -112,3 +112,15 @@ a:hover {
     font-size: 13px;
 
 }
+
+.TextHighlight {
+
+    color: var(--theme) !important;
+
+}
+.SubTitle {
+
+    color: var(--subTitle);
+    font-size: 14px;
+
+}

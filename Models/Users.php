@@ -45,13 +45,25 @@ Class Users extends Model{
 	
 	public function getList(){
 		$data = array();
-		$sql = $this->db->prepare("SELECT users.id, users.name, users.email, users.id_group, users.type, users.situation, permission_groups.name AS name_group FROM users INNER JOIN permission_groups ON permission_groups.id = users.id_group");
+		$sql = $this->db->prepare("SELECT users.id, users.name, users.email FROM users");
 		$sql->execute();
 
 		if($sql->rowCount()>0){
 			$data = $sql->fetchAll(PDO::FETCH_ASSOC);
 		}
 		return $data;
+	}
+
+	public function getUser(string $userId) {
+
+		$data = array();
+		$sql = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+		$sql->bindValue(":id", $userId);
+		$sql->execute();
+		$data = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+		return $data;
+
 	}
 
 	public function doLogin($email, $password){

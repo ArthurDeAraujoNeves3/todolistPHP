@@ -47,7 +47,7 @@ class LoginController extends Controller {
 					
                     if ( $request ) {
 
-						//header("location: ". BASE_URL . "Login");
+						header("location: ". BASE_URL . "Home");
 
                     } else {
 

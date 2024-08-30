@@ -69,3 +69,48 @@
     font-size: 14px;
 
 }
+
+/*Formulário de criação de projetos*/
+.NewProjectForm {
+
+    width: 100%;
+    border: 1px solid var(--detailsDark);
+    border-radius: var(--rounded);
+    
+}
+.NewProjectForm > .Inputs {
+
+    padding: 8px;
+
+}
+.NewProjectForm > .Botoes {
+
+    border-top: 1px solid var(--detailsDark);
+    padding: 8px;
+
+}
+.NewProjectForm > section > div > input {
+
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: var(--text2);
+
+}
+.NewProjectForm > section > div > input:focus {
+
+    outline: none;
+    box-shadow: none !important;
+
+}
+.NewProjectForm > section > .Description > textarea {
+
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 13px;
+    color: var(--text2);
+    resize: none;
+
+}

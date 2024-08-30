@@ -59,6 +59,12 @@ button[type=submit]:focus {
     box-shadow:0 0 0 .25rem var(--errorBoxShadow) !important;
 
 }
+.btn-secondary {
+
+    background-color: var(--btnBg) !important;
+    border-color: var(--btnBg) !important;
+
+}
 input:focus {
 
     border-color: var(--theme) !important;
@@ -66,7 +72,7 @@ input:focus {
 
 }
 
-/* Apenas para as telas de Login e Cadastro */
+/* Fundo claro apenas para as telas de Login e Cadastro */
 .bgLight {
 
     background-color: white;
@@ -89,6 +95,7 @@ a:hover {
 
 }
 
+/* Inputs */
 .InputError {
 
     border-color: var(--error) !important;
@@ -105,7 +112,6 @@ a:hover {
     box-shadow:0 0 0 .25rem var(--errorBoxShadow) !important;
 
 }
-
 .InputAlert {
 
     color: var(--error);
@@ -122,5 +128,13 @@ a:hover {
 
     color: var(--subTitle);
     font-size: 14px;
+
+}
+
+/* Buttons */
+.BtnDisabled {
+
+    cursor: not-allowed !important;
+    filter: brightness(.5);
 
 }

@@ -38,6 +38,7 @@
     <main class="container">
 
         <h1 class="fs-4 text-white">Hoje</h1>
+        <p class="SubTitle">Olá <?php echo $userName; ?></p>
 
         <section class="d-flex mt-4">
 
@@ -50,7 +51,7 @@
 
         </section> <!--Quantidade de projetos-->
 
-        <section id="addProject" class="">
+        <section id="AddProject" class="d-none">
 
             <form class="NewProjectForm" method="post">
 
@@ -74,8 +75,19 @@
 
                     <article class="d-flex align-items-center gap-1">
 
-                        <button type="button" class="form-control btn btn-secondary">Cancelar</button>
-                        <button type="submit" class="form-control btn-primary BtnDisabled">Adicionar tarefa</button>
+                        <button onclick="addNewProject()" type="button" class="form-control btn btn-secondary">
+
+                            <i class="d-md-none bi bi-x-lg"></i> 
+                            <p class="d-md-flex d-none m-0">Cancelar</p>
+
+                        </button> <!--Cancelar-->
+
+                        <button onclick="" type="submit" disabled class="form-control btn-primary BtnDisabled">
+                            
+                            <i class="d-md-none bi bi-send-fill"></i>
+                            <p class="d-md-flex d-none m-0">Adicionar tarefa</p>
+                    
+                        </button> <!--Adicionar tarefa-->
 
                     </article>
 
@@ -83,7 +95,7 @@
                 
             </form>
 
-        </section> <!--Visualização dos projetos-->
+        </section> <!--Novo projeto-->
 
         <section id="ActionsBtns" class="d-flex mt-4">
 
@@ -98,7 +110,7 @@
 
             </div>
 
-        </section> <!--AdicionarBotão-->
+        </section> <!--Botão de adição-->
 
         <section id="NoProjects" class="d-flex align-items-center justify-content-center">
 
@@ -122,7 +134,8 @@
 
     </main>
 
-    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/main.js' ?>"></script>
+    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/showModal.js' ?>"></script> <!--Script para ativar o modal de criação de projetos-->
+    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/form.js' ?>"></script> <!--Script para validação dos inputs do formulário-->
 
 </body>
 

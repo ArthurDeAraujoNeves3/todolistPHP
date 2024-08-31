@@ -45,4 +45,3 @@ function verifyDesc() {
     validateInput(desc.value.length > 500);
 
 };
- 

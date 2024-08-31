@@ -33,7 +33,7 @@
             <div class="<?= $projectsRows == 0 ? 'd-none invisible' : 'd-flex' ?> align-items-center gap-1">
 
                 <i class="bi bi-check-circle SubTitle"></i>
-                <p class="SubTitle m-0"><?= $projectsRows?> tarefas</p>
+                <p class="SubTitle m-0"><?= $projectsRows ?> <?= $projectsRows == 1 ? 'tarefa' : 'tarefas' ?></p>
 
             </div> <!--Tarefas concluídas-->
 
@@ -52,23 +52,37 @@
 
                     echo "
 
-                        <div class='Project'>
+                        <div class='d-flex align-items-center justify-content-between text-white Project'>
 
-                            <section class='d-flex align-items-start gap-2 text-white'>
+                            <section class='d-flex align-items-start gap-2'>
 
                                 <div name='checkProject' value='$userId' class='MarkBtn'>
 
                                     <i class='bi bi-check2 m-0'></i>
 
-                                </div>
+                                </div> <!--Btn para marcar projeto como concluído-->
 
-                                <div class=''d-flex flex-column>
+                                <div class='d-flex flex-column Informations'>
 
-                                    <p class='m-0'>$name</p>
-                                    <p class='m-0 SubTitle'>$description</p>
+                                    <div class='d-flex align-items-center justify-content-between'>
+
+                                        <p class='m-0 text-truncate'>$name</p>
+                                        
+                                        <section class='d-none align-items-center gap-1 Btns'>
+
+                                            <div class='ProjectBtn'>
+
+                                                <i class='bi bi-pen'></i>
+
+                                            </div>
                                 
-                                </div>
+                                        </section> <!--Botões de ações-->
+
+                                    </div> <!--Nome e btns-->
+
+                                    <p class='m-0 text-truncate SubTitle'>$description</p>
                                 
+                                </div> <!--Nome, descrição e os botões-->
 
                             </section>
                         

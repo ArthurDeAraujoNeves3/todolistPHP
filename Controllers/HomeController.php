@@ -53,7 +53,9 @@ class HomeController extends Controller {
 
                 };
 
-            } else {
+            }
+            //Faz a listagem dos projetos normalmente
+            else {
 
                 $task = new Tasks();
                 $projects = $task->listProjects($userId);

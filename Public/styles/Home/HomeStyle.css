@@ -116,3 +116,48 @@
     resize: none;
 
 }
+
+.Project {
+
+    border-bottom: 1px solid var(--subTitle);
+    padding: 20px 0px;
+
+}
+.Project > section {
+
+    width: 100%;
+
+}
+.Project > section > .Informations {
+
+    width: 100%;
+
+}
+.ProjectBtn {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    border-radius: var(--rounded);
+    cursor: pointer;
+    
+}
+.ProjectBtn:hover {
+
+    background-color: #404040;
+    
+}
+.ProjectBtn > i {
+
+    color: var(--subTitle);
+    
+}
+/*Botões*/
+.Project:hover > section > .Informations > div > .Btns {
+
+    display: flex !important;
+
+}

@@ -19,7 +19,7 @@
 
 }
 
-/*Botão de adição de tarefas*/
+/* Botão de adição de tarefas */
 .AddButton > div {
 
     display: flex;
@@ -41,7 +41,7 @@
     background-color: var(--theme);
 
 }
-/*Ícone*/
+/* Ícone */
 .AddButton:hover > div > i {
 
     color: white !important;
@@ -70,7 +70,7 @@
 
 }
 
-/*Formulário de criação de projetos*/
+/* Formulário de criação de projetos */
 .NewProjectForm {
 
     width: 100%;
@@ -89,7 +89,7 @@
     padding: 8px;
 
 }
-/*Input de título*/
+/* Input de título */
 .NewProjectForm > section > div > input {
 
     width: 100%;
@@ -104,7 +104,7 @@
     box-shadow: none !important;
 
 }
-/*Input de descrição*/
+/* Input de descrição */
 .NewProjectForm > section > .Description > textarea {
 
     width: 100%;
@@ -155,9 +155,24 @@
     color: var(--subTitle);
     
 }
-/*Botões*/
+/* Botões */
 .Project:hover > section > .Informations > div > .Btns {
 
     display: flex !important;
+
+}
+
+.Bloco {
+
+    width: 40px;
+    height: 40px;
+    background-color: red;
+
+}
+.BlocoVerde {
+
+    width: 40px;
+    height: 40px;
+    background-color: green;
 
 }

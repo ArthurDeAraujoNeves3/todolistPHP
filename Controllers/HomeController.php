@@ -18,6 +18,16 @@ class HomeController extends Controller {
 
     }
 
+    public function listProjects(string $userId) {
+
+        $task = new Tasks();
+        $projects = $task->listProjects($userId);
+
+        $this->data["userProjects"] = $projects;
+        $this->data["projectsRows"] = count($projects);
+
+    }
+
     public function index() {
 
         if ( !isset($_SESSION[CONF_SESSION_NAME]) ) {
@@ -54,14 +64,22 @@ class HomeController extends Controller {
                 };
 
             }
+            //Atualizar projetos
+            elseif ( isset($_REQUEST["update"]) ) {
+
+                $name = trim($_REQUEST["projectName"]);
+                $desc = trim($_REQUEST["projectDescription"]);
+                $id = trim($_REQUEST["update"]);
+
+                echo $name, $desc, $id;
+
+                $this->listProjects($userId);
+
+            }
             //Faz a listagem dos projetos normalmente
             else {
 
-                $task = new Tasks();
-                $projects = $task->listProjects($userId);
-
-                $this->data["userProjects"] = $projects;
-                $this->data["projectsRows"] = count($projects);
+                $this->listProjects($userId);
 
             };
 

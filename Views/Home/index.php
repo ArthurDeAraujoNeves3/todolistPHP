@@ -49,10 +49,11 @@
                     $status = $project["status"];
                     $description = $project["description"];
                     $userId = $project["userId"];
+                    $id = $project["id"];
 
                     echo "
 
-                        <div class='d-flex align-items-center justify-content-between text-white Project'>
+                        <div id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
 
                             <section class='d-flex align-items-start gap-2'>
 
@@ -70,11 +71,17 @@
                                         
                                         <section class='d-none align-items-center gap-1 Btns'>
 
-                                            <div class='ProjectBtn'>
+                                            <div onclick='editProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
 
                                                 <i class='bi bi-pen'></i>
 
-                                            </div>
+                                            </div> <!--Editar-->
+
+                                            <div class='ProjectBtn'>
+
+                                                <i class='bi bi-trash3 text-danger'></i>
+
+                                            </div> <!--Excluir-->
                                 
                                         </section> <!--Botões de ações-->
 
@@ -87,6 +94,8 @@
                             </section>
                         
                         </div>
+
+                        <div id='$id' class='formEdit'></div>
 
                     ";
 
@@ -179,8 +188,9 @@
 
     </main>
 
-    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/showModal.js' ?>"></script> <!--Script para ativar o modal de criação de projetos-->
-    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/form.js' ?>"></script> <!--Script para validação dos inputs do formulário-->
+    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/showModal.js' ?>"></script> <!--Ativar o modal de criação de projetos-->
+    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/form.js' ?>"></script> <!--Validação dos inputs do formulário-->
+    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/projectEdit.js' ?>"></script> <!--EEditar e excluir projetos-->
 
 </body>
 

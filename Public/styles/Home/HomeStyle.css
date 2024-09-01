@@ -186,6 +186,11 @@
     border-color: var(--subTitle) !important;
 
 }
+.MarkBtnCorrect {
+
+    border-color: var(--correct) !important;
+
+}
 /* Ícone */
 .MarkBtnIcon {
     
@@ -203,7 +208,7 @@
 }
 .MarkBtnIconChecked {
 
-    color: var(--subTitle);
+    color: var(--correct);
     font-size: 12px;
     line-height: 0 !important;
     transition: 0.2s;

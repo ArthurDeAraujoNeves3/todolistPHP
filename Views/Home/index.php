@@ -56,7 +56,7 @@
                     $icon = "";
                     
                     //Definindo estilos de acordo com o status do produto
-                    $status == 1 ? $markBtnStyle = "MarkBtn" : $markBtnStyle = "MarkBtn";
+                    $status == 1 ? $markBtnStyle = "MarkBtnCorrect" : $markBtnStyle = "MarkBtn";
                     $status == 1 ? $textStyle = "text-decoration-line-through" : $textStyle = "";
                     $status == 1 ? $icon = "MarkBtnIconChecked" : $icon = "MarkBtnIcon";
                     

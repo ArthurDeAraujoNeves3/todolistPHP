@@ -161,18 +161,51 @@
     display: flex !important;
 
 }
+/* Botão para concluir tarefa */
+.Project > section > form > button {
 
-.Bloco {
-
-    width: 40px;
-    height: 40px;
-    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 18px;
+    max-height: 18px;
+    border: 1px solid var(--subTitle);
+    border-radius: 999px;
+    cursor: pointer;
+    background-color: transparent !important;
 
 }
-.BlocoVerde {
+.Project > section > form > button:focus {
 
-    width: 40px;
-    height: 40px;
-    background-color: green;
+    border-color: var(--subTitle) !important;
+    box-shadow: none !important;
+
+}
+.MarkBtn:hover {
+    
+    border-color: var(--subTitle) !important;
+
+}
+/* Ícone */
+.MarkBtnIcon {
+    
+    color: var(--subTitle);
+    font-size: 12px;
+    line-height: 0 !important;
+    opacity: 0;
+    transition: 0.2s;
+
+}
+.MarkBtn:hover > .MarkBtnIcon {
+    
+    opacity: 1;
+
+}
+.MarkBtnIconChecked {
+
+    color: var(--subTitle);
+    font-size: 12px;
+    line-height: 0 !important;
+    transition: 0.2s;
 
 }

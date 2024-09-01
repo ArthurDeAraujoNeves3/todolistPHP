@@ -44,6 +44,7 @@ class HomeController extends Controller {
             $this->data["userName"] = $user[0]["name"];
             $this->data["userEmail"] = $user[0]["email"];
 
+            //Criar novos projetos
             if ( isset($_REQUEST["submit"]) ) {
 
                 $name = $_REQUEST["projectName"];
@@ -64,6 +65,25 @@ class HomeController extends Controller {
                 };
 
             }
+            //Alterar status do projeto
+            elseif ( isset($_REQUEST["changeStatus"]) ) {
+
+                $id = $_REQUEST["changeStatus"];
+                
+                $tasks = new Tasks();
+                $project = $tasks->getProject($id);
+
+                $projectName = $project[0]["name"];
+                $projectDesc = $project[0]["description"];
+                $projectStatus = $project[0]["status"];
+
+                $projectStatus == 0 ? $projectStatus = 1 : $projectStatus = 0 ;
+                echo $projectName, $projectDesc, $projectStatus;
+                
+                $tasks->updateProject($projectName, $projectDesc, $projectStatus, $id);
+                $this->listProjects($userId);
+
+            }
             //Atualizar projetos
             elseif ( isset($_REQUEST["update"]) ) {
 
@@ -71,7 +91,8 @@ class HomeController extends Controller {
                 $desc = trim($_REQUEST["projectDescription"]);
                 $id = trim($_REQUEST["update"]);
 
-                echo $name, $desc, $id;
+                $tasks = new Tasks();
+                $tasks->updateProject($name, $desc, 0, $id);
 
                 $this->listProjects($userId);
 

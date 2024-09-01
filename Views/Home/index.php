@@ -51,23 +51,36 @@
                     $userId = $project["userId"];
                     $id = $project["id"];
 
+                    $markBtnStyle = "";
+                    $textStyle = "";
+                    $icon = "";
+                    
+                    //Definindo estilos de acordo com o status do produto
+                    $status == 1 ? $markBtnStyle = "MarkBtn" : $markBtnStyle = "MarkBtn";
+                    $status == 1 ? $textStyle = "text-decoration-line-through" : $textStyle = "";
+                    $status == 1 ? $icon = "MarkBtnIconChecked" : $icon = "MarkBtnIcon";
+                    
                     echo "
 
                         <div id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
 
                             <section class='d-flex align-items-start gap-2'>
 
-                                <div name='checkProject' value='$userId' class='MarkBtn'>
+                                <form method='post'>
 
-                                    <i class='bi bi-check2 m-0'></i>
+                                    <button type='submit' name='changeStatus' value='$id' class='$markBtnStyle'>
 
-                                </div> <!--Btn para marcar projeto como concluído-->
+                                        <i class='bi bi-check2 m-0 $icon'></i>
+
+                                    </button>
+
+                                </form> <!--Btn para marcar projeto como concluído-->
 
                                 <div class='d-flex flex-column Informations'>
 
                                     <div class='d-flex align-items-center justify-content-between'>
 
-                                        <p class='m-0 text-truncate'>$name</p>
+                                        <p class='$textStyle m-0 text-truncate'>$name</p>
                                         
                                         <section class='d-none align-items-center gap-1 Btns'>
 

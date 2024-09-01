@@ -2,8 +2,6 @@ function verifyInputs() {
 
     function validateInput( isValid ) {
 
-        console.log(isValid);
-
         if ( isValid ) {
 
             addButton.removeAttribute("disabled");
@@ -22,7 +20,7 @@ function verifyInputs() {
     let name = document.getElementById("projectName");
     
     validateInput(name.value.length > 0 && name.value.length <= 60);
-    verifyDesc();
+    //verifyDesc();
 
 };
 

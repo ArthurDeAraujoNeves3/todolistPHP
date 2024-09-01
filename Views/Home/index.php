@@ -11,9 +11,43 @@
     <title>Hoje – Todoist</title>
 </head>
 
-<body class="p-3 py-1">
+<body>
 
-    <header class="d-flex align-items-center justify-content-end Header">
+    <div id="ModalBg" class="ModalBg d-none">
+
+        <form method="post" id="ModalDelete" class="ModalDelete">
+
+            <section class="message">
+
+                <p class="text-white"></p>
+
+            </section> <!--Alerta-->
+
+            <section class="d-flex align-items-center justify-content-end">
+
+                <article class="d-flex align-items-center gap-1">
+
+                    <button onclick="" type="button" class="form-control btn btn-secondary">
+
+                        <p class="d-flex m-0">Cancelar</p>
+
+                    </button> <!--Cancelar-->
+
+                    <button type="submit" name="delete" value="" class="form-control btn-primary">
+                                        
+                        <p class="d-flex m-0">Excluir</p>
+                                
+                    </button> <!--Excluir-->
+
+                </article>
+
+            </section> <!--Botões-->
+
+        </form>
+
+    </div> <!--Modal para deletar-->
+
+    <header class="d-flex align-items-center justify-content-end p-3 py-1 Header">
 
         <div class="UserIcon">
 
@@ -23,7 +57,7 @@
 
     </header>
 
-    <main class="container">
+    <main class="container p-3 py-1">
 
         <h1 class="fs-4 text-white">Hoje</h1>
         <p class="SubTitle m-0">Olá <?= $userName ?></p>
@@ -76,13 +110,13 @@
 
                                 </form> <!--Btn para marcar projeto como concluído-->
 
-                                <div class='d-flex flex-column Informations'>
+                                <article class='d-flex flex-column Informations'>
 
-                                    <div class='d-flex align-items-center justify-content-between'>
+                                    <section class='d-flex align-items-center justify-content-between'>
 
                                         <p class='$textStyle m-0 text-truncate'>$name</p>
                                         
-                                        <section class='d-none align-items-center gap-1 Btns'>
+                                        <article class='d-none align-items-center gap-1 Btns'>
 
                                             <div onclick='editProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
 
@@ -90,19 +124,19 @@
 
                                             </div> <!--Editar-->
 
-                                            <div class='ProjectBtn'>
+                                            <div onclick='deleteProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
 
                                                 <i class='bi bi-trash3 text-danger'></i>
 
                                             </div> <!--Excluir-->
                                 
-                                        </section> <!--Botões de ações-->
+                                        </article> <!--Botões de ações-->
 
-                                    </div> <!--Nome e btns-->
+                                    </section> <!--Nome e btns-->
 
                                     <p class='m-0 text-truncate SubTitle'>$description</p>
                                 
-                                </div> <!--Nome, descrição e os botões-->
+                                </article> <!--Nome, descrição e os botões-->
 
                             </section>
                         

@@ -156,7 +156,7 @@
     
 }
 /* Botões */
-.Project:hover > section > .Informations > div > .Btns {
+.Project:hover > section > .Informations > section > .Btns {
 
     display: flex !important;
 
@@ -212,5 +212,15 @@
     font-size: 12px;
     line-height: 0 !important;
     transition: 0.2s;
+
+}
+
+.ModalDelete {
+
+    max-width: 100%;
+    width: 450px;
+    border-radius: var(--rounded);
+    padding: 10px;
+    background-color: var(--bg);
 
 }

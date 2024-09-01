@@ -97,6 +97,16 @@ class HomeController extends Controller {
                 $this->listProjects($userId);
 
             }
+            elseif ( isset($_REQUEST["delete"]) ) {
+
+                $id = $_REQUEST["delete"];
+                
+                $tasks = new Tasks();
+                $tasks->deleteProject($id);
+
+                $this->listProjects($userId);
+
+            }
             //Faz a listagem dos projetos normalmente
             else {
 

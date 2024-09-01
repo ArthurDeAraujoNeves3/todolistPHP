@@ -98,7 +98,7 @@ function deleteProject(id, name, description) {
 
     };
 
-    let message = `Tem certeza que deseja excluir <b>${name} ${description}</b>?`;
+    let message = `Tem certeza que deseja excluir <b>${name} </br> ${description}</b>?`;
 
     let modal = document.getElementById("ModalDelete");
     let cancelBtn = modal.children[1].children[0].children[0]; //Botão de cancelar

@@ -19,7 +19,7 @@
 
             <section class="message">
 
-                <p class="text-white"></p>
+                <p class="text-white text-truncate"></p>
 
             </section> <!--Alerta-->
 

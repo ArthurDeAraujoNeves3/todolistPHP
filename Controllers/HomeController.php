@@ -144,6 +144,24 @@ class HomeController extends Controller {
                 };
 
             }
+            //Alterar status da tarefa
+            elseif ( isset($_REQUEST["changeStatusTask"]) ) {
+
+                $id = $_REQUEST["changeStatusTask"];
+                
+                $tasks = new Tasks();
+                $task = $tasks->getTask($id);
+
+                $taskName = $task[0]["name"];
+                $taskDesc = $task[0]["description"];
+                $taskStatus = $task[0]["status"];
+
+                $taskStatus == 0 ? $taskStatus = 1 : $taskStatus = 0 ;
+                
+                $tasks->updateTask($taskName, $taskDesc, $taskStatus, $id);
+                $this->listTasks($id);
+
+            }
             //Atualizar tarefas 
             elseif ( isset($_REQUEST["updateTask"]) ) {
 
@@ -155,6 +173,16 @@ class HomeController extends Controller {
                 $tasks->updateTask($name, $desc, 0, $id);
 
                 $this->listProjects($id);
+
+            }
+            elseif ( isset($_REQUEST["deleteTask"]) ) {
+
+                $id = $_REQUEST["deleteTask"];
+                
+                $tasks = new Tasks();
+                $tasks->deleteTask($id);
+
+                $this->listTasks($userId);
 
             }
 

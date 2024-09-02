@@ -175,8 +175,18 @@ function editTask(id, name, description) {
         //Adicionando valores no input
         let inputName = formEdit.children[0][0]; //Input nome
         let inputDescription = formEdit.children[0][1]; //Input descrição
+        inputName.onkeyup = function() {
+
+            verifyInputs(0);
+
+        };
         inputName.value = name;
         inputName.name = "taskName";
+        inputDescription.onkeyup = function() {
+
+            verifyDesc(0);
+
+        };
         inputDescription.value = description;
         inputDescription.name = "taskDescription";
         
@@ -230,6 +240,7 @@ function deleteTask(id, name, description) {
 
     };
     modal.children[0].children[0].innerHTML = message; //Defininfo mensagem da tag <p>
+    submitBtn.name = "deleteTask";
     submitBtn.value = id;
 
 };

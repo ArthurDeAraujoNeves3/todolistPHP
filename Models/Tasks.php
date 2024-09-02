@@ -68,6 +68,15 @@ class Tasks extends Model {
         $sql->execute();
 
     }
+    public function getTask( string $id ) {
+
+        $sql = $this->db->prepare("SELECT * FROM tasks WHERE id = :id");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+        return $sql->fetchAll();
+
+    }
     public function listTasks( string $projectId ) {
 
         $sql = $this->db->prepare("SELECT * FROM tasks WHERE projectId = :id");
@@ -79,10 +88,19 @@ class Tasks extends Model {
     }
     public function updateTask( string $name, string $desc, string $status, string $id ) {
 
+        echo $id;
+
         $sql = $this->db->prepare("UPDATE tasks SET name = :name, description = :desc, status = :status WHERE id = :id");
         $sql->bindValue(":name", $name);
         $sql->bindValue(":desc", $desc);
         $sql->bindValue(":status", $status);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+    }
+    public function deleteTask( string $id ) {
+
+        $sql = $this->db->prepare("DELETE FROM tasks WHERE id = :id");
         $sql->bindValue(":id", $id);
         $sql->execute();
 

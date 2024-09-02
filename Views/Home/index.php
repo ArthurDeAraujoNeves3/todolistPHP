@@ -107,6 +107,8 @@
                                     $projectId = $task["projectId"];
                                     $id = $task["id"];
 
+                                    var_dump($status);
+
                                     $urlDetails = BASE_URL . "Home/?name=$name&desc=$description&id=$id"; //Url para ver os detalhes do projeto, como as tarefas
 
                                     $markBtnStyle = "";
@@ -120,13 +122,13 @@
 
                                     echo "
 
-                                            <div id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
+                                            <section id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
 
-                                                <section class='d-flex align-items-start gap-2'>
+                                                <a href='#' class='d-flex align-items-start gap-2'>
 
                                                     <form method='post'>
 
-                                                        <button type='submit' name='changeStatus' value='$id' class='$markBtnStyle'>
+                                                        <button type='submit' name='changeStatusTask' value='$id' class='$markBtnStyle'>
 
                                                             <i class='bi bi-check2 m-0 $icon'></i>
 
@@ -146,7 +148,7 @@
                                                     
                                                     </article> <!--Nome, descrição e os botões-->
 
-                                                </section>
+                                                </a>
 
                                                 <section class='d-none align-items-center gap-1 Btns'>
 
@@ -156,7 +158,7 @@
 
                                                     </div> <!--Editar-->
 
-                                                    <div onclick='deleteProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+                                                    <div onclick='deleteTask(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
 
                                                         <i class='bi bi-trash3 text-danger'></i>
 
@@ -164,7 +166,7 @@
                                                     
                                                 </section> <!--Botões de ações-->
                                             
-                                            </div>
+                                            </section>
 
                                             <div id='$id' class='formEdit'></div>
 
@@ -240,12 +242,6 @@
                     </section> <!--Principal-->
 
                 </article> <!--Detalhes do produto-->
-
-                <article class="BarraLateral">
-
-                    <p></p>
-
-                </article> <!--Barra lateral-->
 
             </section>
 
@@ -373,7 +369,7 @@
 
                     <div class="Description">
 
-                        <textarea onkeyup="verifyInputs(1)" type="text" name="projectDescription" maxlength="500" placeholder="Descrição" id="projectDescription"></textarea>
+                        <textarea onkeyup="verifyDesc(1)" type="text" name="projectDescription" maxlength="500" placeholder="Descrição" id="projectDescription"></textarea>
 
                     </div> <!--Descrição do projeto-->
 

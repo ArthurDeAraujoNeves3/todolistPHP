@@ -290,12 +290,3 @@
     padding: 10px;
     
 }
-.ModalSeeDetails > section > .Conteudo
-.ModalSeeDetails > section > .BarraLateral {
-
-    background-color: var(--btnBg);
-    width: 270px;
-    height: 100vh;
-    padding: 5px 20px;
-
-}

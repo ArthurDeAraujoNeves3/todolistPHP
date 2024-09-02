@@ -147,8 +147,6 @@ class HomeController extends Controller {
             //Atualizar tarefas 
             elseif ( isset($_REQUEST["updateTask"]) ) {
 
-                echo "ATUALIZAR";
-
                 $name = $_REQUEST["taskName"];
                 $desc = $_REQUEST["taskDescription"];
                 $id = $_REQUEST["updateTask"];

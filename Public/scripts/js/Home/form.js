@@ -1,4 +1,4 @@
-function verifyInputs() {
+function verifyInputs(index) {
 
     function validateInput( isValid ) {
 
@@ -16,15 +16,16 @@ function verifyInputs() {
 
     };
 
-    let addButton = document.getElementById("addButton");
-    let name = document.getElementById("projectName");
+    let addButton = document.querySelectorAll("#addButton");
+    addButton = addButton[index];
+    let name = document.querySelectorAll("#projectName");
+    name = name[index];
     
     validateInput(name.value.length > 0 && name.value.length <= 60);
-    //verifyDesc();
-
+    
 };
 
-function verifyDesc() {
+function verifyDesc(index) {
 
     function validateInput( isValid ) {
 
@@ -38,7 +39,8 @@ function verifyDesc() {
     };
 
     let addButton = document.getElementById("addButton");
-    let desc = document.getElementById("projectDescription");
+    let desc = document.querySelectorAll("#projectDescription");
+    desc = desc[index];
     
     validateInput(desc.value.length > 500);
 

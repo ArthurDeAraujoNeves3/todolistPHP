@@ -121,17 +121,21 @@
 
     border-bottom: 1px solid var(--subTitle);
     padding: 20px 0px;
-    cursor: pointer;
-
+    
 }
-.Project > section {
+.Project > a {
 
     width: 100%;
 
 }
-.Project > section > .Informations {
+.Project > a > .Informations {
 
     width: 100%;
+
+}
+.Project > a > .Informations > section > p {
+
+    color: var(--text2);
 
 }
 .ProjectBtn {
@@ -157,13 +161,13 @@
     
 }
 /* Botões */
-.Project:hover > section > .Informations > section > .Btns {
+.Project:hover > .Btns {
 
     display: flex !important;
 
 }
 /* Botão para concluir tarefa */
-.Project > section > form > button, .ModalSeeDetails > section > .Conteudo > div > button {
+.Project > a > form > button, .ModalSeeDetails > section > .Conteudo > div > button {
 
     display: flex;
     align-items: center;
@@ -176,7 +180,7 @@
     background-color: transparent !important;
 
 }
-.Project > section > form > button:focus, .ModalSeeDetails > section > .Conteudo > div > button:focus {
+.Project > a > form > button:focus, .ModalSeeDetails > section > .Conteudo > div > button:focus {
 
     border-color: var(--subTitle) !important;
     box-shadow: none !important;

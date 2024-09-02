@@ -13,7 +13,7 @@
 
 <body>
 
-    <div id="ModalBg" class="ModalBg d-none">
+    <div id="ModalBg" class="ModalBg d-none" style="z-index: 50;">
 
         <form method="post" id="ModalDelete" class="ModalDelete">
 
@@ -140,22 +140,6 @@
 
                                                             <p class='$textStyle m-0 text-truncate'>$name</p>
                                                             
-                                                            <article class='d-none align-items-center gap-1 Btns'>
-
-                                                                <div onclick='editTask(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
-
-                                                                    <i class='bi bi-pen'></i>
-
-                                                                </div> <!--Editar-->
-
-                                                                <div onclick='deleteProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
-
-                                                                    <i class='bi bi-trash3 text-danger'></i>
-
-                                                                </div> <!--Excluir-->
-                                                    
-                                                            </article> <!--Botões de ações-->
-
                                                         </section> <!--Nome e btns-->
 
                                                         <p class='m-0 text-truncate SubTitle'>$description</p>
@@ -163,6 +147,22 @@
                                                     </article> <!--Nome, descrição e os botões-->
 
                                                 </section>
+
+                                                <section class='d-none align-items-center gap-1 Btns'>
+
+                                                    <div onclick='editTask(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+
+                                                        <i class='bi bi-pen'></i>
+
+                                                    </div> <!--Editar-->
+
+                                                    <div onclick='deleteProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+
+                                                        <i class='bi bi-trash3 text-danger'></i>
+
+                                                    </div> <!--Excluir-->
+                                                    
+                                                </section> <!--Botões de ações-->
                                             
                                             </div>
 
@@ -184,13 +184,13 @@
 
                                     <div class="Title">
 
-                                        <input onkeyup="verifyInputs()" type="text" name="taskName" maxlength="60" placeholder="Nome da tarefa" id="projectName" aria-describedby="projectName" />
+                                        <input onkeyup="verifyInputs(0)" type="text" name="taskName" maxlength="60" placeholder="Nome da tarefa" id="projectName" aria-describedby="taskName" />
 
                                     </div> <!--Nome do projeto-->
 
                                     <div class="Description">
 
-                                        <textarea onkeyup="verifyInputs()" type="text" name="taskDescription" maxlength="500" placeholder="Descrição" id="projectDescription"></textarea>
+                                        <textarea onkeyup="verifyDesc(0)" type="text" name="taskDescription" maxlength="500" placeholder="Descrição" id="projectDescription"></textarea>
 
                                     </div> <!--Descrição do projeto-->
 
@@ -304,9 +304,9 @@
 
                 echo "
 
-                        <a href='$urlDetails' id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
+                        <section id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
 
-                            <section class='d-flex align-items-start gap-2'>
+                            <a href='$urlDetails' class='d-flex align-items-start gap-2'>
 
                                 <form method='post'>
 
@@ -324,31 +324,31 @@
 
                                         <p class='$textStyle m-0 text-truncate'>$name</p>
                                         
-                                        <article class='d-none align-items-center gap-1 Btns'>
-
-                                            <div onclick='editProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
-
-                                                <i class='bi bi-pen'></i>
-
-                                            </div> <!--Editar-->
-
-                                            <div onclick='deleteProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
-
-                                                <i class='bi bi-trash3 text-danger'></i>
-
-                                            </div> <!--Excluir-->
-                                
-                                        </article> <!--Botões de ações-->
-
-                                    </section> <!--Nome e btns-->
+                                    </section> <!--Nome-->
 
                                     <p class='m-0 text-truncate SubTitle'>$description</p>
                                 
                                 </article> <!--Nome, descrição e os botões-->
 
-                            </section>
+                            </a>
+
+                            <section class='d-none align-items-center gap-1 Btns'>
+
+                                <div onclick='editProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+
+                                    <i class='bi bi-pen'></i>
+
+                                </div> <!--Editar-->
+
+                                <div onclick='deleteProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+
+                                    <i class='bi bi-trash3 text-danger'></i>
+
+                                </div> <!--Excluir-->
+                                
+                            </section> <!--Botões de ações-->
                         
-                        </a>
+                        </section>
 
                         <div id='$id' class='formEdit'></div>
 
@@ -367,13 +367,13 @@
 
                     <div class="Title">
 
-                        <input onkeyup="verifyInputs()" type="text" name="projectName" maxlength="60" placeholder="Nome da tarefa" id="projectName" aria-describedby="projectName" />
+                        <input onkeyup="verifyInputs(1)" type="text" name="projectName" maxlength="60" placeholder="Nome da tarefa" id="projectName" aria-describedby="projectName" />
 
                     </div> <!--Nome do projeto-->
 
                     <div class="Description">
 
-                        <textarea onkeyup="verifyInputs()" type="text" name="projectDescription" maxlength="500" placeholder="Descrição" id="projectDescription"></textarea>
+                        <textarea onkeyup="verifyInputs(1)" type="text" name="projectDescription" maxlength="500" placeholder="Descrição" id="projectDescription"></textarea>
 
                     </div> <!--Descrição do projeto-->
 

@@ -200,3 +200,36 @@ function editTask(id, name, description) {
     };
 
 };
+
+function deleteTask(id, name, description) {
+
+    const modalBg = document.getElementById("ModalBg");
+
+    //Condição para fazer modal sumir e aparecer
+    if ( modalBg.className.includes("d-none") ) {
+
+        modalBg.classList.remove("d-none");
+        modalBg.classList.add("d-flex");
+
+    } else {
+
+        modalBg.classList.remove("d-flex");
+        modalBg.classList.add("d-none");
+
+    };
+
+    let message = `Tem certeza que deseja excluir <b>${name} </br> ${description}</b>?`;
+
+    let modal = document.getElementById("ModalDelete");
+    let cancelBtn = modal.children[1].children[0].children[0]; //Botão de cancelar
+    let submitBtn = modal.children[1].children[0].children[1]; //Botão de envio
+    cancelBtn.onclick = function() {
+
+        modalBg.classList.remove("d-flex");
+        modalBg.classList.add("d-none");
+
+    };
+    modal.children[0].children[0].innerHTML = message; //Defininfo mensagem da tag <p>
+    submitBtn.value = id;
+
+};

@@ -90,7 +90,7 @@
 
 }
 /* Input de título */
-.NewProjectForm > section > div > input {
+#projectName {
 
     width: 100%;
     border: none;
@@ -98,14 +98,14 @@
     color: var(--text2);
 
 }
-.NewProjectForm > section > div > input:focus {
+#projectName:focus {
 
     outline: none;
     box-shadow: none !important;
 
 }
 /* Input de descrição */
-.NewProjectForm > section > .Description > textarea {
+#projectDescription {
 
     width: 100%;
     outline: none;
@@ -121,6 +121,7 @@
 
     border-bottom: 1px solid var(--subTitle);
     padding: 20px 0px;
+    cursor: pointer;
 
 }
 .Project > section {
@@ -162,7 +163,7 @@
 
 }
 /* Botão para concluir tarefa */
-.Project > section > form > button {
+.Project > section > form > button, .ModalSeeDetails > section > .Conteudo > div > button {
 
     display: flex;
     align-items: center;
@@ -175,7 +176,7 @@
     background-color: transparent !important;
 
 }
-.Project > section > form > button:focus {
+.Project > section > form > button:focus, .ModalSeeDetails > section > .Conteudo > div > button:focus {
 
     border-color: var(--subTitle) !important;
     box-shadow: none !important;
@@ -222,5 +223,74 @@
     border-radius: var(--rounded);
     padding: 10px;
     background-color: var(--bg);
+    overflow: hidden;
+
+}
+
+.ModalSeeDetails {
+
+    max-width: 100%;
+    width: 850px;
+    height: 500px;
+    border-radius: var(--rounded);
+    background-color: var(--bg);
+    overflow: hidden;
+
+}
+.ModalSeeDetails > header {
+
+    height: 48px;
+    border-bottom: 1px solid var(--subTitle);
+    
+}
+/* Título */
+.ModalSeeDetails > header > .Title > i {
+
+    color: var(--text2);
+    
+}
+.ModalSeeDetails > header > .Title > p {
+
+    font-size: 13px;
+    color: var(--text2);
+    
+}
+/* Botão para fechar o modal */
+.ModalSeeDetails > header > .Btns > a {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+    border-radius: var(--rounded);
+    transition: 0.2s;
+    cursor: pointer;
+    
+}
+.ModalSeeDetails > header > .Btns > a:hover {
+
+    background-color: #404040;
+    
+}
+/* ícone */
+.ModalSeeDetails > header > .Btns > a > i {
+
+    color: var(--text2);
+    
+}
+.ModalSeeDetails > section > .Conteudo, .ModalSeeDetails > section > .Conteudo > section {
+
+    width: 100%;
+    padding: 10px;
+
+}
+.ModalSeeDetails > section > .BarraLateral {
+
+    background-color: var(--btnBg);
+    width: 270px;
+    height: 100vh;
+    padding: 5px 20px;
 
 }

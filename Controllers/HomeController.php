@@ -43,6 +43,7 @@ class HomeController extends Controller {
             $user = $user->getUser($userId);
             $this->data["userName"] = $user[0]["name"];
             $this->data["userEmail"] = $user[0]["email"];
+            $this->data["projectTasks"] = array();
 
             //Criar novos projetos
             if ( isset($_REQUEST["submit"]) ) {
@@ -78,7 +79,6 @@ class HomeController extends Controller {
                 $projectStatus = $project[0]["status"];
 
                 $projectStatus == 0 ? $projectStatus = 1 : $projectStatus = 0 ;
-                echo $projectName, $projectDesc, $projectStatus;
                 
                 $tasks->updateProject($projectName, $projectDesc, $projectStatus, $id);
                 $this->listProjects($userId);
@@ -97,6 +97,7 @@ class HomeController extends Controller {
                 $this->listProjects($userId);
 
             }
+            //Deletar projeto
             elseif ( isset($_REQUEST["delete"]) ) {
 
                 $id = $_REQUEST["delete"];
@@ -111,6 +112,36 @@ class HomeController extends Controller {
             else {
 
                 $this->listProjects($userId);
+
+            };
+
+            if ( isset($_REQUEST["newTask"]) ) {
+
+
+
+            };
+
+            //Verificando se ele está com o projeto aberto
+            if ( isset($_GET["name"]) && isset($_GET["desc"]) && isset($_GET["id"]) ) {
+
+                $name = trim($_GET["name"]);
+                $desc = trim($_GET["desc"]);
+                $id = trim($_GET["id"]);
+
+                $task = new Tasks();
+                $project = $task->getProject( $id );
+
+                $status = $project[0]['status'];
+                
+                $this->data["seeDetails"] = true;
+                $this->data["productDetails"] = [
+
+                    "name" => $name,
+                    "desc" => $desc,
+                    "status" => $status,
+                    "id" => $id
+
+                ];
 
             };
 

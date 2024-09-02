@@ -39,3 +39,28 @@ function addNewProject() {
     };
 
 };
+
+function addNewTask() {
+
+    let ActionsBtns = document.getElementById("ActionsBtnsTask"); //Botão de adicionar
+    let AddProjectModal = document.getElementById("AddTask"); //Modal para criação de novas tarefas
+
+    if ( !AddProjectModal.className.includes("d-flex") ) {
+
+        ActionsBtns.classList.remove("d-flex");
+        ActionsBtns.classList.add("d-none");
+
+        AddProjectModal.classList.remove("d-none");
+        AddProjectModal.classList.add("d-flex");
+
+    } else {
+
+        ActionsBtns.classList.remove("d-none");
+        ActionsBtns.classList.add("d-flex");
+
+        AddProjectModal.classList.remove("d-flex");
+        AddProjectModal.classList.add("d-none");
+
+    };
+
+};

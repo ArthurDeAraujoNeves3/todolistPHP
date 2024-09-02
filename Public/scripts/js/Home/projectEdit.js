@@ -1,6 +1,6 @@
 function editProject(id, name, description) {
 
-    let formEdits = document.querySelectorAll("#EditProject");
+    let formEdits = document.querySelectorAll("#EditProject"); //Pegando todos os formulários de edição
     
     //Verificando se já está ocorrendo uma edição
     if ( formEdits.length > 0 ) {
@@ -28,6 +28,7 @@ function editProject(id, name, description) {
         
     });
 
+    //Se o formulário não estiver aberto
     if ( !formReference.children[0] ) {
 
         let formAdd = document.getElementById("AddProject");
@@ -49,7 +50,6 @@ function editProject(id, name, description) {
             product.classList.add("d-flex");
         
         };
-        console.log(submitBtn.children[1]);
         submitBtn.children[1].innerHTML = "Salvar"; //Tag <p>
         submitBtn.name = "update"; //Altero daqui a pouco
         submitBtn.value = id; //Inserindo o id do projeto para 

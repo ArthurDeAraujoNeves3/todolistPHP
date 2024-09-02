@@ -120,7 +120,7 @@
 
                                     echo "
 
-                                            <a href='$urlDetails' id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
+                                            <div id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
 
                                                 <section class='d-flex align-items-start gap-2'>
 
@@ -142,7 +142,7 @@
                                                             
                                                             <article class='d-none align-items-center gap-1 Btns'>
 
-                                                                <div onclick='editProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+                                                                <div onclick='editTask(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
 
                                                                     <i class='bi bi-pen'></i>
 
@@ -164,7 +164,7 @@
 
                                                 </section>
                                             
-                                            </a>
+                                            </div>
 
                                             <div id='$id' class='formEdit'></div>
 

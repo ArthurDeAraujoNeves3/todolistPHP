@@ -143,7 +143,22 @@ class HomeController extends Controller {
 
                 };
 
-            };
+            }
+            //Atualizar tarefas 
+            elseif ( isset($_REQUEST["updateTask"]) ) {
+
+                echo "ATUALIZAR";
+
+                $name = $_REQUEST["taskName"];
+                $desc = $_REQUEST["taskDescription"];
+                $id = $_REQUEST["updateTask"];
+
+                $tasks = new Tasks();
+                $tasks->updateTask($name, $desc, 0, $id);
+
+                $this->listProjects($id);
+
+            }
 
             //Verificando se ele está com o projeto aberto
             if ( isset($_GET["name"]) && isset($_GET["desc"]) && isset($_GET["id"]) ) {
@@ -169,7 +184,7 @@ class HomeController extends Controller {
                 ];
 
             };
-
+            
             $this->loadView('Home/index', $this->data);
 
         };

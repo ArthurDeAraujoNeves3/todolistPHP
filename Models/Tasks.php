@@ -77,5 +77,15 @@ class Tasks extends Model {
         return $sql->fetchAll();
 
     }
+    public function updateTask( string $name, string $desc, string $status, string $id ) {
+
+        $sql = $this->db->prepare("UPDATE tasks SET name = :name, description = :desc, status = :status WHERE id = :id");
+        $sql->bindValue(":name", $name);
+        $sql->bindValue(":desc", $desc);
+        $sql->bindValue(":status", $status);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+    }
 
 };

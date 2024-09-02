@@ -55,9 +55,26 @@ class Tasks extends Model {
 
     //Funções para as tarefas
 
-    public function createTask( string $name, string $userId ) {
+    public function newTask( string $name, string $desc, string $projectId ) {
 
         $id = uniqid();
+
+        $sql = $this->db->prepare("INSERT INTO tasks(name, description, status, projectId, id) VALUES(:name, :desc, :status, :projectId, :id)");
+        $sql->bindValue(":name", $name);
+        $sql->bindValue(":desc", $desc);
+        $sql->bindValue(":status", 0);
+        $sql->bindValue(":projectId", $projectId);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+    }
+    public function listTasks( string $projectId ) {
+
+        $sql = $this->db->prepare("SELECT * FROM tasks WHERE projectId = :id");
+        $sql->bindValue(":id", $projectId);
+        $sql->execute();
+
+        return $sql->fetchAll();
 
     }
 

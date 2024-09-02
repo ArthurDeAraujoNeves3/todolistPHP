@@ -86,7 +86,7 @@
 
                     </div> <!--Marcar como concluído-->
 
-                    <section class="d-flex flex-column gap-3">
+                    <section class="d-flex flex-column overflow-auto gap-3">
 
                         <article class="d-flex flex-column">
 
@@ -95,7 +95,7 @@
 
                         </article> <!--Textos-->
 
-                        <article class="d-flex flex-column gap-2 mt-3">
+                        <article id="tasks" class="d-flex flex-column gap-2 mt-3">
 
                             <?php
 
@@ -104,7 +104,7 @@
                                     $name = $task["name"];
                                     $status = $task["status"];
                                     $description = $task["description"];
-                                    $userId = $task["userId"];
+                                    $projectId = $task["projectId"];
                                     $id = $task["id"];
 
                                     $urlDetails = BASE_URL . "Home/?name=$name&desc=$description&id=$id"; //Url para ver os detalhes do projeto, como as tarefas
@@ -176,7 +176,7 @@
 
                         </article> <!--Visualização das tarefas-->
 
-                        <section id="AddTask" class="d-flex mt-4">
+                        <section id="AddTask" class="d-none mt-4">
 
                             <form class="NewProjectForm" method="post">
 
@@ -207,7 +207,7 @@
 
                                         </button> <!--Cancelar-->
 
-                                        <button id="addButton" type="submit" name="newTask" disabled class="form-control btn-primary BtnDisabled">
+                                        <button id="addButton" type="submit" value="<?= $productDetails['id'] ?>" name="newTask" disabled class="form-control btn-primary BtnDisabled">
 
                                             <i class="d-md-none bi bi-send-fill"></i>
                                             <p class="d-md-flex d-none m-0">Adicionar tarefa</p>
@@ -249,7 +249,7 @@
 
             </section>
 
-                            </div>
+        </div>
 
     </div> <!--Modal para ver mais detalhes-->
 

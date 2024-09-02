@@ -27,6 +27,15 @@ class HomeController extends Controller {
         $this->data["projectsRows"] = count($projects);
 
     }
+    public function listTasks(string $projectId) {
+
+        $task = new Tasks();
+        $tasks = $task->listTasks($projectId);
+
+        $this->data["projectTasks"] = $tasks;
+        $this->data["projectsTasksRows"] = count($tasks);
+
+    }
 
     public function index() {
 
@@ -43,8 +52,7 @@ class HomeController extends Controller {
             $user = $user->getUser($userId);
             $this->data["userName"] = $user[0]["name"];
             $this->data["userEmail"] = $user[0]["email"];
-            $this->data["projectTasks"] = array();
-
+            
             //Criar novos projetos
             if ( isset($_REQUEST["submit"]) ) {
 
@@ -115,9 +123,25 @@ class HomeController extends Controller {
 
             };
 
+            //Tarefas
+            //Criar novas tarefas
             if ( isset($_REQUEST["newTask"]) ) {
 
+                $name = $_REQUEST["taskName"];
+                $desc = $_REQUEST["taskDescription"];
+                
+                $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
 
+                if ( $nameIsValid && $descIsValid ) {
+
+                    $projectId = $_REQUEST["newTask"];
+
+                    $task = new Tasks();
+                    $task->newTask($name, $desc, $projectId);
+                    $this->listTasks($projectId);
+
+                };
 
             };
 
@@ -133,6 +157,7 @@ class HomeController extends Controller {
 
                 $status = $project[0]['status'];
                 
+                $this->listTasks($id);
                 $this->data["seeDetails"] = true;
                 $this->data["productDetails"] = [
 

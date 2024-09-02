@@ -234,8 +234,8 @@
     height: 500px;
     border-radius: var(--rounded);
     background-color: var(--bg);
-    overflow: hidden;
-
+    overflow-y: auto;
+    
 }
 .ModalSeeDetails > header {
 
@@ -284,8 +284,9 @@
 
     width: 100%;
     padding: 10px;
-
+    
 }
+.ModalSeeDetails > section > .Conteudo
 .ModalSeeDetails > section > .BarraLateral {
 
     background-color: var(--btnBg);

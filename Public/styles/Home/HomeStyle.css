@@ -167,7 +167,7 @@
 
 }
 /* Botão para concluir tarefa */
-.Project > a > form > button, .ModalSeeDetails > section > .Conteudo > div > button {
+.Project > a > form > button, .ModalSeeDetails > section > .Conteudo > form > button {
 
     display: flex;
     align-items: center;
@@ -180,7 +180,7 @@
     background-color: transparent !important;
 
 }
-.Project > a > form > button:focus, .ModalSeeDetails > section > .Conteudo > div > button:focus {
+.Project > a > form > button:focus, .ModalSeeDetails > section > .Conteudo > form > button:focus {
 
     border-color: var(--subTitle) !important;
     box-shadow: none !important;

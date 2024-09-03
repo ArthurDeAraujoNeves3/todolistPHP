@@ -54,7 +54,7 @@
             <header class="d-flex align-items-center px-2 justify-content-between">
 
                 <section class="d-flex align-items-center gap-2 text-white Title">
-                    
+
                     <i class="bi bi-inbox"></i>
                     <p class="m-0">Projeto</p>
 
@@ -76,15 +76,15 @@
 
                 <article class="d-flex align-items-start gap-2 Conteudo">
 
-                    <div>
+                    <form method="post">
 
-                        <button type="submit" name="changeStatus" value="<?= $productDetails['id'] ?>" class="<?= $productDetails['status'] == 1 ? 'MarkBtnCorrect' : 'MarkBtn' ?>">
+                        <button type="submit" name="<?= !isset($_GET['tasks']) && !isset($_GET['subtasks']) ? 'changeStatus' : (isset($_GET["subtasks"]) ? 'changeStatusSubTask' : 'changeStatusTask') ?>" value="<?= $productDetails['id'] ?>" class="<?= $productDetails['status'] == 1 ? 'MarkBtnCorrect' : 'MarkBtn' ?>">
 
                             <i class='<?= $productDetails['status'] == 1 ? 'MarkBtnIconChecked' : 'MarkBtnIcon' ?> bi bi-check2 m-0'></i>
 
-                        </button> 
+                        </button>
 
-                    </div> <!--Marcar como concluído-->
+                    </form> <!--Marcar como concluído-->
 
                     <section class="d-flex flex-column overflow-auto gap-3">
 
@@ -97,84 +97,67 @@
 
                         <article id="tasks" class="d-flex flex-column gap-2 mt-3">
 
-                            <?php
+                            <?php foreach ($projectTasks as $project): ?>
 
-                                foreach($projectTasks as $task) {
+                                <?php
 
-                                    $name = $task["name"];
-                                    $status = $task["status"];
-                                    $description = $task["description"];
-                                    $projectId = $task["projectId"];
-                                    $id = $task["id"];
+                                    $name = $project["name"];
+                                    $desc = $project["description"];
+                                    $id = $project["id"];
 
-                                    var_dump($status);
+                                    $urlDetails = isset($_GET["tasks"]) ? BASE_URL . "Home/?name=$name&desc=$desc&subtasks=true&id=$id" : BASE_URL . "Home/?name=$name&desc=$desc&tasks=true&id=$id";
 
-                                    $urlDetails = BASE_URL . "Home/?name=$name&desc=$description&id=$id"; //Url para ver os detalhes do projeto, como as tarefas
+                                ?> <!--Url personalizada para ver os detalhes-->
 
-                                    $markBtnStyle = "";
-                                    $textStyle = "";
-                                    $icon = "";
+                                <section id="<?= $project['id'] ?>" class="d-flex align-items-center justify-content-between text-white Project">
 
-                                    //Definindo estilos de acordo com o status do produto
-                                    $status == 1 ? $markBtnStyle = "MarkBtnCorrect" : $markBtnStyle = "MarkBtn";
-                                    $status == 1 ? $textStyle = "text-decoration-line-through" : $textStyle = "";
-                                    $status == 1 ? $icon = "MarkBtnIconChecked" : $icon = "MarkBtnIcon";
+                                    <a href="<?= $urlDetails ?>" class="d-flex align-items-start gap-2">
 
-                                    echo "
+                                        <form method="post">
 
-                                            <section id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
+                                            <button type="submit" name="<?= isset($_GET["tasks"]) ? 'changeStatusSubTask' : 'changeStatusTask' ?>" value="<?= $project["id"] ?>" class="<?= $project['status'] == 1 ? 'MarkBtnCorrect' : 'MarkBtn' ?>">
 
-                                                <a href='#' class='d-flex align-items-start gap-2'>
+                                                <i class="bi bi-check2 m-0 <?= $project['status'] == 1 ? 'MarkBtnIconChecked' : 'MarkBtnIcon' ?>"></i>
 
-                                                    <form method='post'>
+                                            </button>
 
-                                                        <button type='submit' name='changeStatusTask' value='$id' class='$markBtnStyle'>
+                                        </form> <!--Btn para marcar projeto como concluído-->
 
-                                                            <i class='bi bi-check2 m-0 $icon'></i>
+                                        <article class="d-flex flex-column Informations">
 
-                                                        </button>
+                                            <section class="d-flex align-items-center justify-content-between">
 
-                                                    </form> <!--Btn para marcar projeto como concluído-->
+                                                <p class="<?= $project['status'] == 1 ? 'text-decoration-line-through' : '' ?> m-0 text-truncate"><?= $project["name"] ?></p>
 
-                                                    <article class='d-flex flex-column Informations'>
+                                            </section> <!--Nome-->
 
-                                                        <section class='d-flex align-items-center justify-content-between'>
+                                            <p class="<?= $project['status'] == 1 ? 'text-decoration-line-through' : '' ?> m-0 text-truncate SubTitle"><?= $project["description"] ?></p>
 
-                                                            <p class='$textStyle m-0 text-truncate'>$name</p>
-                                                            
-                                                        </section> <!--Nome e btns-->
+                                        </article> <!--Nome, descrição e os botões-->
 
-                                                        <p class='m-0 text-truncate SubTitle'>$description</p>
-                                                    
-                                                    </article> <!--Nome, descrição e os botões-->
+                                    </a>
 
-                                                </a>
+                                    <section class="d-none align-items-center gap-1 Btns">
 
-                                                <section class='d-none align-items-center gap-1 Btns'>
+                                        <div onclick="editSubTask( '<?= $project['id'] ?>', '<?= $project['name'] ?>', '<?= $project['description'] ?>' )" class="ProjectBtn">
 
-                                                    <div onclick='editTask(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+                                            <i class="bi bi-pen"></i>
 
-                                                        <i class='bi bi-pen'></i>
+                                        </div> <!--Editar-->
 
-                                                    </div> <!--Editar-->
+                                        <div onclick="deleteSubTask( '<?= $project['id'] ?>', '<?= $project['name'] ?>', '<?= $project['description'] ?>' )" class="ProjectBtn">
 
-                                                    <div onclick='deleteTask(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+                                            <i class="bi bi-trash3 text-danger"></i>
 
-                                                        <i class='bi bi-trash3 text-danger'></i>
+                                        </div> <!--Excluir-->
 
-                                                    </div> <!--Excluir-->
-                                                    
-                                                </section> <!--Botões de ações-->
-                                            
-                                            </section>
+                                    </section> <!--Botões de ações-->
 
-                                            <div id='$id' class='formEdit'></div>
+                                </section>
 
-                                    ";
+                                <div id="<?= $project['id'] ?>" class="formEdit"></div>
 
-                                };
-
-                            ?>
+                            <?php endforeach; ?>
 
                         </article> <!--Visualização das tarefas-->
 
@@ -224,7 +207,7 @@
 
                         </section> <!--Novo projeto-->
 
-                        <section id="ActionsBtnsTask" class="d-flex mt-4">
+                        <section id="ActionsBtnsTask" class="<?= isset($_GET["subtasks"]) ? 'd-none' : 'd-flex' ?> mt-4">
 
                             <div onclick="addNewTask()" class="d-flex align-items-center gap-1 AddButton">
 
@@ -277,81 +260,67 @@
 
         <section class="d-flex flex-column gap-2 mt-3">
 
-            <?php
+            <?php foreach ($projects as $project): ?>
 
-            foreach ($userProjects as $project) {
+                <?php
 
-                $name = $project["name"];
-                $status = $project["status"];
-                $description = $project["description"];
-                $userId = $project["userId"];
-                $id = $project["id"];
+                    $name = $project["name"];
+                    $desc = $project["description"];
+                    $id = $project["id"];
 
-                $urlDetails = BASE_URL . "Home/?name=$name&desc=$description&id=$id"; //Url para ver os detalhes do projeto, como as tarefas
+                    $urlDetails = BASE_URL . "Home/?name=$name&desc=$desc&id=$id";
 
-                $markBtnStyle = "";
-                $textStyle = "";
-                $icon = "";
+                ?> <!--Url para ver os detalhes do projeto, como as tarefas-->
 
-                //Definindo estilos de acordo com o status do produto
-                $status == 1 ? $markBtnStyle = "MarkBtnCorrect" : $markBtnStyle = "MarkBtn";
-                $status == 1 ? $textStyle = "text-decoration-line-through" : $textStyle = "";
-                $status == 1 ? $icon = "MarkBtnIconChecked" : $icon = "MarkBtnIcon";
+                <section id="<?= $project['id'] ?>" class="d-flex align-items-center justify-content-between text-white Project">
 
-                echo "
+                    <a href="<?= $urlDetails ?>" class="d-flex align-items-start gap-2">
 
-                        <section id='$id' class='d-flex align-items-center justify-content-between text-white Project'>
+                        <form method="post">
 
-                            <a href='$urlDetails' class='d-flex align-items-start gap-2'>
+                            <button type="submit" name="changeStatus" value="<?= $project["id"] ?>" class="<?= $project['status'] == 1 ? 'MarkBtnCorrect' : 'MarkBtn' ?>">
 
-                                <form method='post'>
+                                <i class="bi bi-check2 m-0 <?= $project['status'] == 1 ? 'MarkBtnIconChecked' : 'MarkBtnIcon' ?>"></i>
 
-                                    <button type='submit' name='changeStatus' value='$id' class='$markBtnStyle'>
+                            </button>
 
-                                        <i class='bi bi-check2 m-0 $icon'></i>
+                        </form> <!--Btn para marcar projeto como concluído-->
 
-                                    </button>
+                        <article class="d-flex flex-column Informations">
 
-                                </form> <!--Btn para marcar projeto como concluído-->
+                            <section class="d-flex align-items-center justify-content-between">
 
-                                <article class='d-flex flex-column Informations'>
+                                <p class="<?= $project['status'] == 1 ? 'text-decoration-line-through' : '' ?> m-0 text-truncate"><?= $project["name"] ?></p>
 
-                                    <section class='d-flex align-items-center justify-content-between'>
+                            </section> <!--Nome-->
 
-                                        <p class='$textStyle m-0 text-truncate'>$name</p>
-                                        
-                                    </section> <!--Nome-->
+                            <p class="<?= $project['status'] == 1 ? 'text-decoration-line-through' : '' ?> m-0 text-truncate SubTitle"><?= $project["description"] ?></p>
 
-                                    <p class='m-0 text-truncate SubTitle'>$description</p>
-                                
-                                </article> <!--Nome, descrição e os botões-->
+                        </article> <!--Nome, descrição e os botões-->
 
-                            </a>
+                    </a>
 
-                            <section class='d-none align-items-center gap-1 Btns'>
+                    <section class="d-none align-items-center gap-1 Btns">
 
-                                <div onclick='editProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+                        <div onclick="editProject( '<?= $project['id'] ?>', '<?= $project['name'] ?>', '<?= $project['description'] ?>' )" class="ProjectBtn">
 
-                                    <i class='bi bi-pen'></i>
+                            <i class="bi bi-pen"></i>
 
-                                </div> <!--Editar-->
+                        </div> <!--Editar-->
 
-                                <div onclick='deleteProject(\"$id\", \"$name\", \"$description\")' class='ProjectBtn'>
+                        <div onclick="deleteProject( '<?= $project['id'] ?>', '<?= $project['name'] ?>', '<?= $project['description'] ?>' )" class="ProjectBtn">
 
-                                    <i class='bi bi-trash3 text-danger'></i>
+                            <i class="bi bi-trash3 text-danger"></i>
 
-                                </div> <!--Excluir-->
-                                
-                            </section> <!--Botões de ações-->
-                        
-                        </section>
+                        </div> <!--Excluir-->
 
-                        <div id='$id' class='formEdit'></div>
+                    </section> <!--Botões de ações-->
 
-                ";
-            };
+                </section>
 
-            ?>
+                <div id="<?= $project['id'] ?>" class="formEdit"></div>
+
+            <?php endforeach; ?>
 
         </section> <!--Visualização dos projetos-->
 
@@ -440,7 +409,7 @@
 
     <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/showModal.js' ?>"></script> <!--Ativar o modal de criação de projetos-->
     <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/form.js' ?>"></script> <!--Validação dos inputs do formulário-->
-    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/projectEdit.js' ?>"></script> <!--EEditar e excluir projetos-->
+    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/projectEdit.js' ?>"></script> <!--Editar e excluir projetos-->
 
 </body>
 

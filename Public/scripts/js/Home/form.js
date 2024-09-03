@@ -38,7 +38,8 @@ function verifyDesc(index) {
 
     };
 
-    let addButton = document.getElementById("addButton");
+    let addButton = document.querySelectorAll("#addButton");
+    addButton = addButton[index];
     let desc = document.querySelectorAll("#projectDescription");
     desc = desc[index];
     

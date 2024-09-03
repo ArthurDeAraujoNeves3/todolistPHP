@@ -20,21 +20,28 @@ class HomeController extends Controller {
 
     public function listProjects(string $userId) {
 
-        $task = new Tasks();
+        $task = new Project();
         $projects = $task->listProjects($userId);
 
-        $this->data["userProjects"] = $projects;
+        $this->data["projects"] = $projects;
         $this->data["projectsRows"] = count($projects);
 
     }
     public function listTasks(string $projectId) {
 
-        $task = new Tasks();
+        $task = new Task();
         $tasks = $task->listTasks($projectId);
 
         $this->data["projectTasks"] = $tasks;
-        $this->data["projectsTasksRows"] = count($tasks);
+        
+    }
+    public function listSubTasks(string $projectId) {
 
+        $task = new SubTask();
+        $tasks = $task->listSubTasks($projectId);
+
+        $this->data["projectTasks"] = $tasks;
+        
     }
 
     public function index() {
@@ -64,13 +71,11 @@ class HomeController extends Controller {
 
                 if ( $nameIsValid && $descIsValid ) {
 
-                    $task = new Tasks();
+                    $task = new Project();
                     $task->newProject($name, $desc, $userId);
-                    $projects = $task->listProjects($userId);
+                    $task->listProjects($userId);
 
-                    $this->data["userProjects"] = $projects;
-                    $this->data["projectsRows"] = count($projects);
-
+                    $this->listProjects($userId);
                 };
 
             }
@@ -79,7 +84,7 @@ class HomeController extends Controller {
 
                 $id = $_REQUEST["changeStatus"];
                 
-                $tasks = new Tasks();
+                $tasks = new Project();
                 $project = $tasks->getProject($id);
 
                 $projectName = $project[0]["name"];
@@ -99,7 +104,7 @@ class HomeController extends Controller {
                 $desc = trim($_REQUEST["projectDescription"]);
                 $id = trim($_REQUEST["update"]);
 
-                $tasks = new Tasks();
+                $tasks = new Project();
                 $tasks->updateProject($name, $desc, 0, $id);
 
                 $this->listProjects($userId);
@@ -110,7 +115,7 @@ class HomeController extends Controller {
 
                 $id = $_REQUEST["delete"];
                 
-                $tasks = new Tasks();
+                $tasks = new Project();
                 $tasks->deleteProject($id);
 
                 $this->listProjects($userId);
@@ -123,25 +128,42 @@ class HomeController extends Controller {
 
             };
 
-            //Tarefas
+            //Tarefas & Subtarefas
+            //Como eles compartilham o mesmo name, estou diferenciando pelo parâmetro tasks que está no url
             //Criar novas tarefas
             if ( isset($_REQUEST["newTask"]) ) {
 
                 $name = $_REQUEST["taskName"];
                 $desc = $_REQUEST["taskDescription"];
-                
+                    
                 $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
                 $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
 
-                if ( $nameIsValid && $descIsValid ) {
+                if ( !isset($_GET["tasks"]) ) {
 
-                    $projectId = $_REQUEST["newTask"];
+                    if ( $nameIsValid && $descIsValid ) {
 
-                    $task = new Tasks();
-                    $task->newTask($name, $desc, $projectId);
-                    $this->listTasks($projectId);
+                        $projectId = $_REQUEST["newTask"];
 
-                };
+                        $task = new Task();
+                        $task->newTask($name, $desc, $projectId);
+                        $this->listTasks($projectId);
+
+                    };
+
+                } else {
+
+                    if ( $nameIsValid && $descIsValid ) {
+
+                        $projectId = $_REQUEST["newTask"];
+
+                        $task = new SubTask();
+                        $task->newSubTask($name, $desc, $projectId);
+                        $this->listSubTasks($projectId);
+
+                    };
+
+                }
 
             }
             //Alterar status da tarefa
@@ -149,7 +171,7 @@ class HomeController extends Controller {
 
                 $id = $_REQUEST["changeStatusTask"];
                 
-                $tasks = new Tasks();
+                $tasks = new Task();
                 $task = $tasks->getTask($id);
 
                 $taskName = $task[0]["name"];
@@ -157,7 +179,7 @@ class HomeController extends Controller {
                 $taskStatus = $task[0]["status"];
 
                 $taskStatus == 0 ? $taskStatus = 1 : $taskStatus = 0 ;
-                
+                    
                 $tasks->updateTask($taskName, $taskDesc, $taskStatus, $id);
                 $this->listTasks($id);
 
@@ -169,7 +191,7 @@ class HomeController extends Controller {
                 $desc = $_REQUEST["taskDescription"];
                 $id = $_REQUEST["updateTask"];
 
-                $tasks = new Tasks();
+                $tasks = new Task();
                 $tasks->updateTask($name, $desc, 0, $id);
 
                 $this->listProjects($id);
@@ -179,26 +201,137 @@ class HomeController extends Controller {
 
                 $id = $_REQUEST["deleteTask"];
                 
-                $tasks = new Tasks();
+                $tasks = new Task();
                 $tasks->deleteTask($id);
 
                 $this->listTasks($userId);
 
             }
 
+            //Subtarefas
+            //Criar novas subtarefas
+            if ( isset($_REQUEST["newSubTask"]) ) {
+
+                $name = $_REQUEST["subTaskName"];
+                $desc = $_REQUEST["subTaskDescription"];
+                
+                $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
+
+                if ( $nameIsValid && $descIsValid ) {
+
+                    $projectId = $_REQUEST["newSubTask"];
+
+                    $task = new SubTask();
+                    $task->newSubTask($name, $desc, $projectId);
+                    $this->listSubTasks($projectId);
+
+                };
+
+            }
+            //Alterar status da subtarefa
+            elseif ( isset($_REQUEST["changeStatusSubTask"]) ) {
+
+                $id = $_REQUEST["changeStatusSubTask"];
+                
+                $tasks = new SubTask();
+                $task = $tasks->getSubTask($id);
+
+                $taskName = $task[0]["name"];
+                $taskDesc = $task[0]["description"];
+                $taskStatus = $task[0]["status"];
+
+                $taskStatus == 0 ? $taskStatus = 1 : $taskStatus = 0 ;
+                
+                $tasks->updateSubTask($taskName, $taskDesc, $taskStatus, $id);
+                $this->listSubTasks($id);
+
+            }
+            //Atualizar subtarefas 
+            elseif ( isset($_REQUEST["updateSubTask"]) ) {
+
+                $name = $_REQUEST["taskName"];
+                $desc = $_REQUEST["taskDescription"];
+                $id = $_REQUEST["updateSubTask"];
+
+                $tasks = new SubTask();
+                $tasks->updateSubTask($name, $desc, 0, $id);
+
+                $this->listSubTasks($id);
+
+            }
+            elseif ( isset($_REQUEST["deleteSubTask"]) ) {
+
+                $id = $_REQUEST["deleteSubTask"];
+                
+                $tasks = new SubTask();
+                $tasks->deleteSubTask($id);
+
+                $this->listSubTasks($userId);
+
+            }
+
             //Verificando se ele está com o projeto aberto
-            if ( isset($_GET["name"]) && isset($_GET["desc"]) && isset($_GET["id"]) ) {
+            if ( isset($_GET["name"]) && isset($_GET["desc"]) && isset($_GET["id"]) && !isset($_GET["tasks"]) && !isset($_GET["subtasks"]) ) {
 
                 $name = trim($_GET["name"]);
                 $desc = trim($_GET["desc"]);
                 $id = trim($_GET["id"]);
 
-                $task = new Tasks();
+                $task = new Project();
                 $project = $task->getProject( $id );
 
                 $status = $project[0]['status'];
                 
                 $this->listTasks($id);
+                $this->data["seeDetails"] = true;
+                $this->data["productDetails"] = [
+
+                    "name" => $name,
+                    "desc" => $desc,
+                    "status" => $status,
+                    "id" => $id
+
+                ];
+
+            }
+            //Tarefas 
+            elseif ( isset($_GET["tasks"]) && $_GET["tasks"] == true ) {
+
+                $name = trim($_GET["name"]);
+                $desc = trim($_GET["desc"]);
+                $id = trim($_GET["id"]);
+
+                $task = new Task();
+                $project = $task->getTask( $id );
+                
+                $status = $project[0]['status'];
+                
+                $this->listSubTasks($id);
+                $this->data["seeDetails"] = true;
+                $this->data["productDetails"] = [
+
+                    "name" => $name,
+                    "desc" => $desc,
+                    "status" => $status,
+                    "id" => $id
+
+                ];
+
+            }
+            //Subtarefas
+            elseif ( isset($_GET["subtasks"]) && $_GET["subtasks"] == true ) {
+
+                $name = trim($_GET["name"]);
+                $desc = trim($_GET["desc"]);
+                $id = trim($_GET["id"]);
+
+                $task = new SubTask();
+                $project = $task->getSubTask( $id );
+                
+                $status = $project[0]['status'];
+                
+                $this->listSubTasks($id);
                 $this->data["seeDetails"] = true;
                 $this->data["productDetails"] = [
 

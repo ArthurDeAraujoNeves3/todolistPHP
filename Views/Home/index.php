@@ -101,11 +101,11 @@
 
                                 <?php
 
-                                    $name = $project["name"];
-                                    $desc = $project["description"];
-                                    $id = $project["id"];
+                                $name = $project["name"];
+                                $desc = $project["description"];
+                                $id = $project["id"];
 
-                                    $urlDetails = isset($_GET["tasks"]) ? BASE_URL . "Home/?name=$name&desc=$desc&subtasks=true&id=$id" : BASE_URL . "Home/?name=$name&desc=$desc&tasks=true&id=$id";
+                                $urlDetails = isset($_GET["tasks"]) ? BASE_URL . "Home/?name=$name&desc=$desc&subtasks=true&id=$id" : BASE_URL . "Home/?name=$name&desc=$desc&tasks=true&id=$id";
 
                                 ?> <!--Url personalizada para ver os detalhes-->
 
@@ -234,11 +234,21 @@
 
     <header class="d-flex align-items-center justify-content-end p-3 py-1 Header">
 
-        <div class="UserIcon">
+        <form method="post">
 
-            <i class="bi bi-person-fill"></i>
+            <div onclick="openMenu()" class="UserIcon">
 
-        </div> <!--ícone do usuário-->
+                <i class="bi bi-person-fill"></i>
+
+            </div> <!--ícone do usuário-->
+
+            <section id="UserMenu" class="UserMenu">
+                
+                <button type="submit" name="logout" class="btn form-control">Sair</button>
+
+            </section> <!--Menu para logout do user-->
+
+        </form>
 
     </header>
 
@@ -264,11 +274,11 @@
 
                 <?php
 
-                    $name = $project["name"];
-                    $desc = $project["description"];
-                    $id = $project["id"];
+                $name = $project["name"];
+                $desc = $project["description"];
+                $id = $project["id"];
 
-                    $urlDetails = BASE_URL . "Home/?name=$name&desc=$desc&id=$id";
+                $urlDetails = BASE_URL . "Home/?name=$name&desc=$desc&id=$id";
 
                 ?> <!--Url para ver os detalhes do projeto, como as tarefas-->
 
@@ -406,7 +416,8 @@
         </section> <!--Sem projetos-->
 
     </main>
-
+    
+    <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/menuUser.js' ?>"></script> <!--Ativar o menu do usuário-->
     <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/showModal.js' ?>"></script> <!--Ativar o modal de criação de projetos-->
     <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/form.js' ?>"></script> <!--Validação dos inputs do formulário-->
     <script src="<?php echo BASE_URL . '/Public/scripts/js/Home/projectEdit.js' ?>"></script> <!--Editar e excluir projetos-->

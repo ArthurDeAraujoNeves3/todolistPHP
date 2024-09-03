@@ -53,6 +53,12 @@ class HomeController extends Controller {
 
         } else {
 
+            if ( isset($_REQUEST["logout"]) ) {
+
+                session_destroy();
+
+            };
+
             //Pegando informações do usuário
             $userId = ($_SESSION[CONF_SESSION_NAME]);
             $user = new Users();

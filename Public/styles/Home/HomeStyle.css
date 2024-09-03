@@ -18,6 +18,20 @@
     font-size: 15px;
 
 }
+.UserMenu {
+
+    position: fixed;
+    margin-left: -150px;
+    margin-top: 20px;
+    width: 180px;
+    background-color: var(--btnBg);
+    border-radius: var(--rounded);
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s;
+
+}
 
 /* Botão de adição de tarefas */
 .AddButton > div {

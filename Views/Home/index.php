@@ -139,13 +139,13 @@
 
                                     <section class="d-none align-items-center gap-1 Btns">
 
-                                        <div onclick="editSubTask( '<?= $project['id'] ?>', '<?= $project['name'] ?>', '<?= $project['description'] ?>' )" class="ProjectBtn">
+                                        <div onclick="<?= isset($_GET["tasks"]) ? 'editSubTask' : 'editTask' ?>( '<?= $project['id'] ?>', '<?= $project['name'] ?>', '<?= $project['description'] ?>' )" class="ProjectBtn">
 
                                             <i class="bi bi-pen"></i>
 
                                         </div> <!--Editar-->
 
-                                        <div onclick="deleteSubTask( '<?= $project['id'] ?>', '<?= $project['name'] ?>', '<?= $project['description'] ?>' )" class="ProjectBtn">
+                                        <div onclick="<?= isset($_GET["tasks"]) ? 'deleteSubTask' : 'deleteTask' ?>( '<?= $project['id'] ?>', '<?= $project['name'] ?>', '<?= $project['description'] ?>' )" class="ProjectBtn">
 
                                             <i class="bi bi-trash3 text-danger"></i>
 

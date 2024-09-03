@@ -84,16 +84,36 @@ class HomeController extends Controller {
 
                 $id = $_REQUEST["changeStatus"];
                 
-                $tasks = new Project();
-                $project = $tasks->getProject($id);
+                $projectObj = new Project();
+                $project = $projectObj->getProject($id);
+                $projects = $projectObj->listProjects($userId);
 
                 $projectName = $project[0]["name"];
                 $projectDesc = $project[0]["description"];
                 $projectStatus = $project[0]["status"];
 
                 $projectStatus == 0 ? $projectStatus = 1 : $projectStatus = 0 ;
+
+                $taskObj = new Task();
+                $tasks = $taskObj->listTasks($id);
+
+                //Atualizando as subtarefas
+                foreach($tasks as $task) {
+
+                    $id = $task["id"];
+                    $taskObj->checkAllChildrens($id, $projectStatus);
+
+                };
+
+                //Atualizando as tarefas
+                foreach($projects as $project) {
+
+                    $id = $project["id"];
+                    $projectObj->checkAllChildrens($id, $projectStatus);
+
+                }
                 
-                $tasks->updateProject($projectName, $projectDesc, $projectStatus, $id);
+                $projectObj->updateProject($projectName, $projectDesc, $projectStatus, $id);
                 $this->listProjects($userId);
 
             }
@@ -115,9 +135,29 @@ class HomeController extends Controller {
 
                 $id = $_REQUEST["delete"];
                 
-                $tasks = new Project();
-                $tasks->deleteProject($id);
+                $projectObj = new Project();
+                $projects = $projectObj->listProjects($userId);
 
+                $taskObj = new Task();
+                $tasks = $taskObj->listTasks($id);
+                
+                //Deletando as subtarefas
+                foreach($tasks as $task) {
+
+                    $id = $task["id"];
+                    $taskObj->deleteChildrens($id);
+
+                };
+
+                //Deletando as tarefas
+                foreach($projects as $project) {
+
+                    $id = $project["id"];
+                    $projectObj->deleteChildrens($id);
+
+                };
+                
+                $projectObj->deleteProject($id);
                 $this->listProjects($userId);
 
             }
@@ -171,16 +211,18 @@ class HomeController extends Controller {
 
                 $id = $_REQUEST["changeStatusTask"];
                 
-                $tasks = new Task();
-                $task = $tasks->getTask($id);
+                $taskObj = new Task();
+                $task = $taskObj->getTask($id);
 
                 $taskName = $task[0]["name"];
                 $taskDesc = $task[0]["description"];
                 $taskStatus = $task[0]["status"];
 
                 $taskStatus == 0 ? $taskStatus = 1 : $taskStatus = 0 ;
-                    
-                $tasks->updateTask($taskName, $taskDesc, $taskStatus, $id);
+
+                $taskObj->checkAllChildrens($id, $taskStatus);
+
+                $taskObj->updateTask($taskName, $taskDesc, $taskStatus, $id);
                 $this->listTasks($id);
 
             }
@@ -199,13 +241,17 @@ class HomeController extends Controller {
             }
             elseif ( isset($_REQUEST["deleteTask"]) ) {
 
+                echo "asdas";
+
                 $id = $_REQUEST["deleteTask"];
                 
-                $tasks = new Task();
-                $tasks->deleteTask($id);
+                $taskObj = new Task();
 
-                $this->listTasks($userId);
+                $taskObj->deleteChildrens($id);
+                $taskObj->deleteTask($id);
 
+                $this->listTasks($id);
+                
             }
 
             //Subtarefas

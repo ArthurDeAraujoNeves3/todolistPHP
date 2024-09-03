@@ -50,4 +50,20 @@ class Project extends Model {
 
     }
 
+    public function deleteChildrens( string $id ) {
+
+        $sql = $this->db->prepare("DELETE FROM tasks WHERE projectId = :id");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+    }
+    public function checkAllChildrens( string $id, int $status ) {
+
+        $sql = $this->db->prepare("UPDATE tasks SET status = :status WHERE projectId = :id");
+        $sql->bindValue(":id", $id);
+        $sql->bindValue(":status", $status);
+        $sql->execute();
+
+    }
+
 }

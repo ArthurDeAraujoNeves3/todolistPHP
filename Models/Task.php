@@ -50,4 +50,20 @@ class Task extends Model {
 
     }
 
+    public function deleteChildrens( string $id ) {
+
+        $sql = $this->db->prepare("DELETE FROM subtasks WHERE taskId = :id");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+    }
+    public function checkAllChildrens( string $id, int $status ) {
+
+        $sql = $this->db->prepare("UPDATE subtasks SET status = :status WHERE taskId = :id");
+        $sql->bindValue(":id", $id);
+        $sql->bindValue(":status", $status);
+        $sql->execute();
+
+    }
+
 }

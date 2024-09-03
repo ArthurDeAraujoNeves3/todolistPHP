@@ -1,7 +1,7 @@
 <?php
-class Task extends Model {
+class Task extends Model implements ModelsWithChildrens {
 
-    public function newTask( string $name, string $desc, string $projectId ) {
+    public function new( string $name, string $desc, string $projectId ) {
 
         $id = uniqid();
 
@@ -14,7 +14,7 @@ class Task extends Model {
         $sql->execute();
 
     }
-    public function getTask( string $id ) {
+    public function get( string $id ) {
 
         $sql = $this->db->prepare("SELECT * FROM tasks WHERE id = :id");
         $sql->bindValue(":id", $id);
@@ -23,7 +23,7 @@ class Task extends Model {
         return $sql->fetchAll();
 
     }
-    public function listTasks( string $projectId ) {
+    public function list( string $projectId ) {
 
         $sql = $this->db->prepare("SELECT * FROM tasks WHERE projectId = :id");
         $sql->bindValue(":id", $projectId);
@@ -32,7 +32,7 @@ class Task extends Model {
         return $sql->fetchAll();
 
     }
-    public function updateTask( string $name, string $desc, string $status, string $id ) {
+    public function update( string $name, string $desc, string $status, string $id ) {
 
         $sql = $this->db->prepare("UPDATE tasks SET name = :name, description = :desc, status = :status WHERE id = :id");
         $sql->bindValue(":name", $name);
@@ -42,15 +42,16 @@ class Task extends Model {
         $sql->execute();
 
     }
-    public function deleteTask( string $id ) {
+    public function delete( string $id ) {
 
         $sql = $this->db->prepare("DELETE FROM tasks WHERE id = :id");
         $sql->bindValue(":id", $id);
         $sql->execute();
 
     }
-
-    public function deleteChildrens( string $id ) {
+    
+    //Funções para alterar as subtarefas 
+    public function deleteAllChildrens( string $id ) {
 
         $sql = $this->db->prepare("DELETE FROM subtasks WHERE taskId = :id");
         $sql->bindValue(":id", $id);
@@ -66,4 +67,4 @@ class Task extends Model {
 
     }
 
-}
+};

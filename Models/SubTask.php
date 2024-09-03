@@ -1,7 +1,7 @@
 <?php 
-class SubTask extends Model {
+class SubTask extends Model implements Models {
 
-    public function newSubTask( string $name, string $desc, string $taskId ) {
+    public function new( string $name, string $desc, string $taskId ) {
 
         $id = uniqid();
 
@@ -14,7 +14,7 @@ class SubTask extends Model {
         $sql->execute();
 
     }
-    public function getSubTask( string $id ) {
+    public function get( string $id ) {
 
         $sql = $this->db->prepare("SELECT * FROM subtasks WHERE id = :id");
         $sql->bindValue(":id", $id);
@@ -23,7 +23,7 @@ class SubTask extends Model {
         return $sql->fetchAll();
 
     }
-    public function listSubTasks( string $projectId ) {
+    public function list( string $projectId ) {
 
         $sql = $this->db->prepare("SELECT * FROM subtasks WHERE taskId = :id");
         $sql->bindValue(":id", $projectId);
@@ -32,7 +32,7 @@ class SubTask extends Model {
         return $sql->fetchAll();
 
     }
-    public function updateSubTask( string $name, string $desc, string $status, string $id ) {
+    public function update( string $name, string $desc, string $status, string $id ) {
 
         $sql = $this->db->prepare("UPDATE subtasks SET name = :name, description = :desc, status = :status WHERE id = :id");
         $sql->bindValue(":name", $name);
@@ -42,7 +42,7 @@ class SubTask extends Model {
         $sql->execute();
 
     }
-    public function deleteSubTask( string $id ) {
+    public function delete( string $id ) {
 
         $sql = $this->db->prepare("DELETE FROM subtasks WHERE id = :id");
         $sql->bindValue(":id", $id);

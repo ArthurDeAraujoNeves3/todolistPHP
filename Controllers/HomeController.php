@@ -21,7 +21,7 @@ class HomeController extends Controller {
     public function listProjects(string $userId) {
 
         $task = new Project();
-        $projects = $task->listProjects($userId);
+        $projects = $task->list($userId);
 
         $this->data["projects"] = $projects;
         $this->data["projectsRows"] = count($projects);
@@ -30,7 +30,7 @@ class HomeController extends Controller {
     public function listTasks(string $projectId) {
 
         $task = new Task();
-        $tasks = $task->listTasks($projectId);
+        $tasks = $task->list($projectId);
 
         $this->data["projectTasks"] = $tasks;
         
@@ -38,7 +38,7 @@ class HomeController extends Controller {
     public function listSubTasks(string $projectId) {
 
         $task = new SubTask();
-        $tasks = $task->listSubTasks($projectId);
+        $tasks = $task->list($projectId);
 
         $this->data["projectTasks"] = $tasks;
         
@@ -72,8 +72,8 @@ class HomeController extends Controller {
                 if ( $nameIsValid && $descIsValid ) {
 
                     $task = new Project();
-                    $task->newProject($name, $desc, $userId);
-                    $task->listProjects($userId);
+                    $task->new($name, $desc, $userId);
+                    $task->list($userId);
 
                     $this->listProjects($userId);
                 };
@@ -85,8 +85,8 @@ class HomeController extends Controller {
                 $id = $_REQUEST["changeStatus"];
                 
                 $projectObj = new Project();
-                $project = $projectObj->getProject($id);
-                $projects = $projectObj->listProjects($userId);
+                $project = $projectObj->get($id);
+                $projects = $projectObj->list($userId);
 
                 $projectName = $project[0]["name"];
                 $projectDesc = $project[0]["description"];
@@ -95,7 +95,7 @@ class HomeController extends Controller {
                 $projectStatus == 0 ? $projectStatus = 1 : $projectStatus = 0 ;
 
                 $taskObj = new Task();
-                $tasks = $taskObj->listTasks($id);
+                $tasks = $taskObj->list($id);
 
                 //Atualizando as subtarefas
                 foreach($tasks as $task) {
@@ -113,7 +113,7 @@ class HomeController extends Controller {
 
                 }
                 
-                $projectObj->updateProject($projectName, $projectDesc, $projectStatus, $id);
+                $projectObj->update($projectName, $projectDesc, $projectStatus, $id);
                 $this->listProjects($userId);
 
             }
@@ -125,7 +125,7 @@ class HomeController extends Controller {
                 $id = trim($_REQUEST["update"]);
 
                 $tasks = new Project();
-                $tasks->updateProject($name, $desc, 0, $id);
+                $tasks->update($name, $desc, 0, $id);
 
                 $this->listProjects($userId);
 
@@ -136,16 +136,16 @@ class HomeController extends Controller {
                 $id = $_REQUEST["delete"];
                 
                 $projectObj = new Project();
-                $projects = $projectObj->listProjects($userId);
+                $projects = $projectObj->list($userId);
 
                 $taskObj = new Task();
-                $tasks = $taskObj->listTasks($id);
+                $tasks = $taskObj->list($id);
                 
                 //Deletando as subtarefas
                 foreach($tasks as $task) {
 
                     $id = $task["id"];
-                    $taskObj->deleteChildrens($id);
+                    $taskObj->deleteAllChildrens($id);
 
                 };
 
@@ -153,11 +153,11 @@ class HomeController extends Controller {
                 foreach($projects as $project) {
 
                     $id = $project["id"];
-                    $projectObj->deleteChildrens($id);
+                    $projectObj->deleteAllChildrens($id);
 
                 };
                 
-                $projectObj->deleteProject($id);
+                $projectObj->delete($id);
                 $this->listProjects($userId);
 
             }
@@ -186,7 +186,7 @@ class HomeController extends Controller {
                         $projectId = $_REQUEST["newTask"];
 
                         $task = new Task();
-                        $task->newTask($name, $desc, $projectId);
+                        $task->new($name, $desc, $projectId);
                         $this->listTasks($projectId);
 
                     };
@@ -198,7 +198,7 @@ class HomeController extends Controller {
                         $projectId = $_REQUEST["newTask"];
 
                         $task = new SubTask();
-                        $task->newSubTask($name, $desc, $projectId);
+                        $task->new($name, $desc, $projectId);
                         $this->listSubTasks($projectId);
 
                     };
@@ -212,7 +212,7 @@ class HomeController extends Controller {
                 $id = $_REQUEST["changeStatusTask"];
                 
                 $taskObj = new Task();
-                $task = $taskObj->getTask($id);
+                $task = $taskObj->get($id);
 
                 $taskName = $task[0]["name"];
                 $taskDesc = $task[0]["description"];
@@ -222,7 +222,7 @@ class HomeController extends Controller {
 
                 $taskObj->checkAllChildrens($id, $taskStatus);
 
-                $taskObj->updateTask($taskName, $taskDesc, $taskStatus, $id);
+                $taskObj->update($taskName, $taskDesc, $taskStatus, $id);
                 $this->listTasks($id);
 
             }
@@ -234,7 +234,7 @@ class HomeController extends Controller {
                 $id = $_REQUEST["updateTask"];
 
                 $tasks = new Task();
-                $tasks->updateTask($name, $desc, 0, $id);
+                $tasks->update($name, $desc, 0, $id);
 
                 $this->listProjects($id);
 
@@ -247,8 +247,8 @@ class HomeController extends Controller {
                 
                 $taskObj = new Task();
 
-                $taskObj->deleteChildrens($id);
-                $taskObj->deleteTask($id);
+                $taskObj->deleteAllChildrens($id);
+                $taskObj->delete($id);
 
                 $this->listTasks($id);
                 
@@ -269,7 +269,7 @@ class HomeController extends Controller {
                     $projectId = $_REQUEST["newSubTask"];
 
                     $task = new SubTask();
-                    $task->newSubTask($name, $desc, $projectId);
+                    $task->new($name, $desc, $projectId);
                     $this->listSubTasks($projectId);
 
                 };
@@ -281,7 +281,7 @@ class HomeController extends Controller {
                 $id = $_REQUEST["changeStatusSubTask"];
                 
                 $tasks = new SubTask();
-                $task = $tasks->getSubTask($id);
+                $task = $tasks->get($id);
 
                 $taskName = $task[0]["name"];
                 $taskDesc = $task[0]["description"];
@@ -289,7 +289,7 @@ class HomeController extends Controller {
 
                 $taskStatus == 0 ? $taskStatus = 1 : $taskStatus = 0 ;
                 
-                $tasks->updateSubTask($taskName, $taskDesc, $taskStatus, $id);
+                $tasks->update($taskName, $taskDesc, $taskStatus, $id);
                 $this->listSubTasks($id);
 
             }
@@ -301,7 +301,7 @@ class HomeController extends Controller {
                 $id = $_REQUEST["updateSubTask"];
 
                 $tasks = new SubTask();
-                $tasks->updateSubTask($name, $desc, 0, $id);
+                $tasks->update($name, $desc, 0, $id);
 
                 $this->listSubTasks($id);
 
@@ -311,7 +311,7 @@ class HomeController extends Controller {
                 $id = $_REQUEST["deleteSubTask"];
                 
                 $tasks = new SubTask();
-                $tasks->deleteSubTask($id);
+                $tasks->delete($id);
 
                 $this->listSubTasks($userId);
 
@@ -325,7 +325,7 @@ class HomeController extends Controller {
                 $id = trim($_GET["id"]);
 
                 $task = new Project();
-                $project = $task->getProject( $id );
+                $project = $task->get( $id );
 
                 $status = $project[0]['status'];
                 
@@ -349,7 +349,7 @@ class HomeController extends Controller {
                 $id = trim($_GET["id"]);
 
                 $task = new Task();
-                $project = $task->getTask( $id );
+                $project = $task->get( $id );
                 
                 $status = $project[0]['status'];
                 
@@ -373,7 +373,7 @@ class HomeController extends Controller {
                 $id = trim($_GET["id"]);
 
                 $task = new SubTask();
-                $project = $task->getSubTask( $id );
+                $project = $task->get( $id );
                 
                 $status = $project[0]['status'];
                 

@@ -91,31 +91,31 @@ class HomeController extends Controller {
                 $id = $_REQUEST["changeStatus"];
                 
                 $projectObj = new Project();
-                $project = $projectObj->get($id);
-                $projects = $projectObj->list($userId);
+                $project = $projectObj->get($id); //Produto específico
+                $projects = $projectObj->list($userId); //Todos os produtos
 
                 $projectName = $project[0]["name"];
                 $projectDesc = $project[0]["description"];
                 $projectStatus = $project[0]["status"];
 
                 $projectStatus == 0 ? $projectStatus = 1 : $projectStatus = 0 ;
-
+                
                 $taskObj = new Task();
                 $tasks = $taskObj->list($id);
 
                 //Atualizando as subtarefas
                 foreach($tasks as $task) {
 
-                    $id = $task["id"];
-                    $taskObj->checkAllChildrens($id, $projectStatus);
+                    $taskId = $task["id"];
+                    $taskObj->checkAllChildrens($taskId, $projectStatus);
 
                 };
 
                 //Atualizando as tarefas
                 foreach($projects as $project) {
 
-                    $id = $project["id"];
-                    $projectObj->checkAllChildrens($id, $projectStatus);
+                    $pId = $project["id"];
+                    $projectObj->checkAllChildrens($pId, $projectStatus);
 
                 }
                 
@@ -150,16 +150,16 @@ class HomeController extends Controller {
                 //Deletando as subtarefas
                 foreach($tasks as $task) {
 
-                    $id = $task["id"];
-                    $taskObj->deleteAllChildrens($id);
+                    $taskId = $task["id"];
+                    $taskObj->deleteAllChildrens($taskId);
 
                 };
 
                 //Deletando as tarefas
                 foreach($projects as $project) {
 
-                    $id = $project["id"];
-                    $projectObj->deleteAllChildrens($id);
+                    $pid = $project["id"];
+                    $projectObj->deleteAllChildrens($pid);
 
                 };
                 

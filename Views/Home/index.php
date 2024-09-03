@@ -86,7 +86,7 @@
 
                     </form> <!--Marcar como concluído-->
 
-                    <section class="d-flex flex-column overflow-auto gap-3">
+                    <section class="d-flex flex-column gap-3">
 
                         <article class="d-flex flex-column">
 

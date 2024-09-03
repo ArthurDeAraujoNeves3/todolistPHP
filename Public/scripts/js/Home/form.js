@@ -31,6 +31,11 @@ function verifyDesc(index) {
 
         if ( isValid ) {
 
+            addButton.removeAttribute("disabled");
+            addButton.classList.remove("BtnDisabled");
+            
+        } else {
+
             addButton.setAttribute("disabled", true);
             addButton.classList.add("BtnDisabled");
             
@@ -42,7 +47,7 @@ function verifyDesc(index) {
     addButton = addButton[index];
     let desc = document.querySelectorAll("#projectDescription");
     desc = desc[index];
-    
-    validateInput(desc.value.length > 500);
+
+    validateInput(desc.value.length <= 500);
 
 };

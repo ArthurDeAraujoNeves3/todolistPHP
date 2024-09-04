@@ -80,6 +80,12 @@ input:focus {
     box-shadow:0 0 0 .25rem var(--InputFocus) !important;
 
 }
+/* Redefinir altura da linha dos textos */
+p {
+
+    line-height: 16px;
+
+}
 
 /* Fundo claro apenas para as telas de Login e Cadastro */
 .bgLight {

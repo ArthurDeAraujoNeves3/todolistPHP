@@ -134,6 +134,7 @@
 
 .Project {
 
+    min-height: 80px;
     border-bottom: 1px solid var(--subTitle);
     padding: 20px 0px;
     
@@ -263,6 +264,9 @@
 }
 .ModalSeeDetails > header {
 
+    position: fixed;
+    max-width: 100%;
+    width: 850px;
     height: 48px;
     border-bottom: 1px solid var(--subTitle);
     
@@ -304,7 +308,12 @@
     color: var(--text2);
     
 }
-.ModalSeeDetails > section > .Conteudo, .ModalSeeDetails > section > .Conteudo > section {
+.ModalSeeDetails > section > .Conteudo > section {
+
+    width: 100%;
+
+}
+.ModalSeeDetails > section > .Conteudo {
 
     width: 100%;
     padding: 10px;

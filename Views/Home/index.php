@@ -72,7 +72,7 @@
 
             </header> <!--Topo-->
 
-            <section class="d-flex">
+            <section class="d-flex mt-5">
 
                 <article class="d-flex align-items-start gap-2 Conteudo">
 
@@ -90,7 +90,7 @@
 
                         <article class="d-flex flex-column">
 
-                            <p class="<?= $productDetails['status'] == 1 ? 'text-decoration-line-through' : '' ?> text-white m-0"><?= $productDetails["name"] ?></p>
+                            <p class="<?= $productDetails['status'] == 1 ? 'text-decoration-line-through' : '' ?> text-white fs-6 m-0"><?= $productDetails["name"] ?></p>
                             <p class="<?= $productDetails['status'] == 1 ? 'text-decoration-line-through' : '' ?> SubTitle m-0"><?= $productDetails["desc"] ?></p>
 
                         </article> <!--Textos-->
@@ -267,6 +267,12 @@
             </div> <!--Tarefas concluídas-->
 
         </section> <!--Quantidade de projetos-->
+
+        <div class="<?= isset($alert) ? 'd-flex' : 'd-none' ?> alert alert-warning" role="alert">
+
+            <?= $alert ?>
+
+        </div> <!--Alerta para erros nos formulários-->
 
         <section class="d-flex flex-column gap-2 mt-3">
 

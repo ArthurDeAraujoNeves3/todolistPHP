@@ -21,6 +21,16 @@ class HomeController extends Controller {
         };
 
     }
+    public function verifyPermission( string $id, string $userId ) {
+
+        if ( $id !== $userId ) {
+
+            header("location: ". BASE_URL . "Home");
+            exit();
+
+        };
+
+    }
 
     public function listProjects(string $userId) {
 
@@ -205,7 +215,7 @@ class HomeController extends Controller {
                         $projectId = $_REQUEST["newTask"];
 
                         $task = new Task();
-                        $task->new($name, $desc, $projectId);
+                        $task->new($name, $desc, $projectId, $this->userId);
                         $this->listTasks($projectId);
 
                     };
@@ -217,7 +227,7 @@ class HomeController extends Controller {
                         $projectId = $_REQUEST["newTask"];
 
                         $task = new SubTask();
-                        $task->new($name, $desc, $projectId);
+                        $task->new($name, $desc, $projectId, $this->userId);
                         $this->listSubTasks($projectId);
 
                     };
@@ -295,7 +305,7 @@ class HomeController extends Controller {
                     $projectId = $_REQUEST["newSubTask"];
 
                     $task = new SubTask();
-                    $task->new($name, $desc, $projectId);
+                    $task->new($name, $desc, $projectId, $this->userId);
                     $this->listSubTasks($projectId);
 
                 };
@@ -350,13 +360,14 @@ class HomeController extends Controller {
 
             }
 
-            //Verificando se ele está com o projeto aberto
+            //Abrindo modal
             if ( isset($_GET["name"]) && isset($_GET["desc"]) && isset($_GET["id"]) && !isset($_GET["tasks"]) && !isset($_GET["subtasks"]) ) {
 
+                
                 $name = trim($_GET["name"]);
                 $desc = trim($_GET["desc"]);
                 $id = trim($_GET["id"]);
-
+                
                 $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
                 $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
                 $idIsValid = $this->validateFunction( $id !== "" && strlen($id) <= 60 );
@@ -367,6 +378,8 @@ class HomeController extends Controller {
                     $project = $task->get( $id );
 
                     if ( count($project) > 0 ) {
+
+                        $this->verifyPermission($project[0]["userId"], $this->userId);
 
                         $status = $project[0]['status'];
                     
@@ -383,7 +396,7 @@ class HomeController extends Controller {
 
                     } else {
 
-                        $this->data["alert"] = "Algo deu errado ;(";
+                        $this->data["alert"] = "Nada encontrado ;(";
 
                     };
 
@@ -408,6 +421,8 @@ class HomeController extends Controller {
 
                     if ( count($task) > 0 ) {
 
+                        $this->verifyPermission($task[0]["userId"], $this->userId);
+
                         $status = $task[0]['status'];
                         
                         $this->listSubTasks($id);
@@ -423,7 +438,7 @@ class HomeController extends Controller {
 
                     } else {
 
-                        $this->data["alert"] = "Algo deu errado ;(";
+                        $this->data["alert"] = "Nada encontrado ;(";
 
                     };
 
@@ -448,8 +463,7 @@ class HomeController extends Controller {
 
                     if ( count($subTask) > 0 ) {
 
-                        
-                        
+                        $this->verifyPermission($subTask[0]["userId"], $this->userId);
                         $status = $subTask[0]['status'];
                         
                         $this->listSubTasks($id);
@@ -465,13 +479,11 @@ class HomeController extends Controller {
 
                     } else {
 
-                        $this->data["alert"] = "Algo deu errado ;(";
+                        $this->data["alert"] = "Nada encontrado ;(";
 
                     };
 
                 };
-
-                
 
             };
             

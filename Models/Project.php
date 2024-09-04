@@ -1,7 +1,7 @@
 <?php
 interface Models {
 
-    public function new( string $name, string $desc, string $userId );
+    public function new( string $name, string $desc, string $id, string $userId );
     public function get( string $id );
     public function list( string $id );
     public function update( string $name, string $desc, string $status, string $id );
@@ -17,7 +17,7 @@ interface ModelsWithChildrens extends Models {
 
 class Project extends Model implements ModelsWithChildrens {
 
-    public function new( string $name, string $desc, string $userId ) {
+    public function new( string $name, string $desc, string $userId, string $id = "" ) {
 
         $id = uniqid();
 

@@ -1,16 +1,17 @@
 <?php
 class Task extends Model implements ModelsWithChildrens {
 
-    public function new( string $name, string $desc, string $projectId ) {
+    public function new( string $name, string $desc, string $projectId, string $userId ) {
 
         $id = uniqid();
 
-        $sql = $this->db->prepare("INSERT INTO tasks(name, description, status, projectId, id) VALUES(:name, :desc, :status, :projectId, :id)");
+        $sql = $this->db->prepare("INSERT INTO tasks(name, description, status, projectId, id, userId) VALUES(:name, :desc, :status, :projectId, :id, :userId)");
         $sql->bindValue(":name", $name);
         $sql->bindValue(":desc", $desc);
         $sql->bindValue(":status", 0);
         $sql->bindValue(":projectId", $projectId);
         $sql->bindValue(":id", $id);
+        $sql->bindValue(":userId", $userId);
         $sql->execute();
 
     }

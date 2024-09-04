@@ -1,16 +1,17 @@
 <?php 
 class SubTask extends Model implements Models {
 
-    public function new( string $name, string $desc, string $taskId ) {
+    public function new( string $name, string $desc, string $taskId, string $userId ) {
 
         $id = uniqid();
 
-        $sql = $this->db->prepare("INSERT INTO subtasks(name, description, status, taskId, id) VALUES(:name, :desc, :status, :taskId, :id)");
+        $sql = $this->db->prepare("INSERT INTO subtasks(name, description, status, taskId, id, userId) VALUES(:name, :desc, :status, :taskId, :id, :userId)");
         $sql->bindValue(":name", $name);
         $sql->bindValue(":desc", $desc);
         $sql->bindValue(":status", 0);
         $sql->bindValue(":taskId", $taskId);
         $sql->bindValue(":id", $id);
+        $sql->bindValue(":userId", $userId);
         $sql->execute();
 
     }

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<?php echo BASE_URL . '/Public/assets/img/Logo/Todoist.png'?>" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo BASE_URL . '/Public/Bootstrap/bootstrap.min.css' ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL . '/Public/index.css' ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL . '/Public/styles/Home/HomeStyle.css' ?>">

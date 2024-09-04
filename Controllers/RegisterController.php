@@ -10,7 +10,7 @@ class RegisterController extends Controller
         if (!$isValid) {
 
             $this->data["alert"] = "Por favor, insira dados válidos!";
-            $this->data["$inputName" . "Error"] = true; //Poupa algumas linhas de código e ele irá enviar com o nome correto para o front
+            $this->data["$inputName" . "Error"] = true; //Faz a junção do nome do input com Error e envia para o front
         
         };
 
@@ -38,11 +38,11 @@ class RegisterController extends Controller
                 $password = trim($_REQUEST["password"] ?? "");
                 $this->data["password"] = $password;
 
-                $emailRegex = "/^[\w\.-]+@[\w\.-]+\.\w{2,6}$/";
+                $emailRegex = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
 
                 $this->validateInput($name !== "" && strlen($name) <= 126, "name");
                 $this->validateInput($email !== "" && preg_match($emailRegex, $email), "email");
-                $this->validateInput($password !== "" && strlen($password) <= 126, "password");
+                $this->validateInput($password !== "" && strlen($password) >= 8 && strlen($password) <= 126, "password");
 
                 if (!isset($data["alert"])) {
 

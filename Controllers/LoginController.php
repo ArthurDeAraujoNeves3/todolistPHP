@@ -36,10 +36,10 @@ class LoginController extends Controller {
                 $password = trim($_REQUEST["password"] ?? "");
                 $this->data["password"] = $password;
 
-                $emailRegex = "/^[\w\.-]+@[\w\.-]+\.\w{2,6}$/";
+                $emailRegex = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
 
                 $this->validateInput($email !== "" && preg_match($emailRegex, $email), "email");
-                $this->validateInput($password !== "" && strlen($password) <= 126, "password");
+                $this->validateInput($password !== "" && strlen($password) >= 8 && strlen($password) <= 126, "password");
 
                 if (!isset($data["alert"])) {
 

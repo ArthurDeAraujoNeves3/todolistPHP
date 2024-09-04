@@ -8,11 +8,8 @@ class HomeController extends Controller {
 
         if ( !$isValid ) {
 
-            return false;
-
-        } else {
-
-            return true;
+            header("location: ". BASE_URL . "Home");
+            exit();
 
         };
 
@@ -73,17 +70,14 @@ class HomeController extends Controller {
                 $name = $_REQUEST["projectName"];
                 $desc = $_REQUEST["projectDescription"];
                 
-                $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
-                $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
+                $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $this->validateFunction( strlen($desc) <= 500 );
 
-                if ( $nameIsValid && $descIsValid ) {
+                $task = new Project();
+                $task->new($name, $desc, $userId);
+                $task->list($userId);
 
-                    $task = new Project();
-                    $task->new($name, $desc, $userId);
-                    $task->list($userId);
-
-                    $this->listProjects($userId);
-                };
+                $this->listProjects($userId);
 
             }
             //Alterar status do projeto
@@ -130,6 +124,9 @@ class HomeController extends Controller {
                 $name = trim($_REQUEST["projectName"]);
                 $desc = trim($_REQUEST["projectDescription"]);
                 $id = trim($_REQUEST["update"]);
+
+                $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $this->validateFunction( strlen($desc) <= 500 );
 
                 $tasks = new Project();
                 $tasks->update($name, $desc, 0, $id);
@@ -183,32 +180,24 @@ class HomeController extends Controller {
                 $name = $_REQUEST["taskName"];
                 $desc = $_REQUEST["taskDescription"];
                     
-                $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
-                $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
+                $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $this->validateFunction( strlen($desc) <= 500 );
 
                 if ( !isset($_GET["tasks"]) ) {
 
-                    if ( $nameIsValid && $descIsValid ) {
+                    $projectId = $_REQUEST["newTask"];
 
-                        $projectId = $_REQUEST["newTask"];
-
-                        $task = new Task();
-                        $task->new($name, $desc, $projectId);
-                        $this->listTasks($projectId);
-
-                    };
+                    $task = new Task();
+                    $task->new($name, $desc, $projectId);
+                    $this->listTasks($projectId);
 
                 } else {
 
-                    if ( $nameIsValid && $descIsValid ) {
+                    $projectId = $_REQUEST["newTask"];
 
-                        $projectId = $_REQUEST["newTask"];
-
-                        $task = new SubTask();
-                        $task->new($name, $desc, $projectId);
-                        $this->listSubTasks($projectId);
-
-                    };
+                    $task = new SubTask();
+                    $task->new($name, $desc, $projectId);
+                    $this->listSubTasks($projectId);
 
                 }
 
@@ -240,6 +229,9 @@ class HomeController extends Controller {
                 $desc = $_REQUEST["taskDescription"];
                 $id = $_REQUEST["updateTask"];
 
+                $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $this->validateFunction( strlen($desc) <= 500 );
+
                 $tasks = new Task();
                 $tasks->update($name, $desc, 0, $id);
 
@@ -268,18 +260,14 @@ class HomeController extends Controller {
                 $name = $_REQUEST["subTaskName"];
                 $desc = $_REQUEST["subTaskDescription"];
                 
-                $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
-                $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
+                $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $this->validateFunction( strlen($desc) <= 500 );
 
-                if ( $nameIsValid && $descIsValid ) {
+                $projectId = $_REQUEST["newSubTask"];
 
-                    $projectId = $_REQUEST["newSubTask"];
-
-                    $task = new SubTask();
-                    $task->new($name, $desc, $projectId);
-                    $this->listSubTasks($projectId);
-
-                };
+                $task = new SubTask();
+                $task->new($name, $desc, $projectId);
+                $this->listSubTasks($projectId);
 
             }
             //Alterar status da subtarefa
@@ -306,6 +294,9 @@ class HomeController extends Controller {
                 $name = $_REQUEST["taskName"];
                 $desc = $_REQUEST["taskDescription"];
                 $id = $_REQUEST["updateSubTask"];
+
+                $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $this->validateFunction( strlen($desc) <= 500 );
 
                 $tasks = new SubTask();
                 $tasks->update($name, $desc, 0, $id);

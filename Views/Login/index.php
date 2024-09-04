@@ -64,7 +64,7 @@
 
 					</section> <!--Inputs-->
 
-					<button onclick="verifyInput()" type="submit" name="submit" class="btn btn-primary">Entrar com e-mail</button>
+					<button onclick="verifyInput()" type="submit" name="submit" class="btn btn-primary">Login</button>
 
 				</form>
 

@@ -357,21 +357,37 @@ class HomeController extends Controller {
                 $desc = trim($_GET["desc"]);
                 $id = trim($_GET["id"]);
 
-                $task = new Project();
-                $project = $task->get( $id );
+                $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
+                $idIsValid = $this->validateFunction( $id !== "" && strlen($id) <= 60 );
 
-                $status = $project[0]['status'];
-                
-                $this->listTasks($id);
-                $this->data["seeDetails"] = true;
-                $this->data["productDetails"] = [
+                if ( $nameIsValid && $descIsValid && $idIsValid ) {
 
-                    "name" => $name,
-                    "desc" => $desc,
-                    "status" => $status,
-                    "id" => $id
+                    $task = new Project();
+                    $project = $task->get( $id );
 
-                ];
+                    if ( count($project) > 0 ) {
+
+                        $status = $project[0]['status'];
+                    
+                        $this->listTasks($id);
+                        $this->data["seeDetails"] = true;
+                        $this->data["productDetails"] = [
+
+                            "name" => $name,
+                            "desc" => $desc,
+                            "status" => $status,
+                            "id" => $id
+
+                        ];
+
+                    } else {
+
+                        $this->data["alert"] = "Algo deu errado ;(";
+
+                    };
+
+                };
 
             }
             //Listar tarefas 
@@ -381,21 +397,37 @@ class HomeController extends Controller {
                 $desc = trim($_GET["desc"]);
                 $id = trim($_GET["id"]);
 
-                $task = new Task();
-                $project = $task->get( $id );
-                
-                $status = $project[0]['status'];
-                
-                $this->listSubTasks($id);
-                $this->data["seeDetails"] = true;
-                $this->data["productDetails"] = [
+                $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
+                $idIsValid = $this->validateFunction( $id !== "" && strlen($id) <= 60 );
 
-                    "name" => $name,
-                    "desc" => $desc,
-                    "status" => $status,
-                    "id" => $id
+                if ( $nameIsValid && $descIsValid && $idIsValid ) {
 
-                ];
+                    $task = new Task();
+                    $task = $task->get( $id );
+
+                    if ( count($task) > 0 ) {
+
+                        $status = $task[0]['status'];
+                        
+                        $this->listSubTasks($id);
+                        $this->data["seeDetails"] = true;
+                        $this->data["productDetails"] = [
+
+                            "name" => $name,
+                            "desc" => $desc,
+                            "status" => $status,
+                            "id" => $id
+
+                        ];
+
+                    } else {
+
+                        $this->data["alert"] = "Algo deu errado ;(";
+
+                    };
+
+                };
 
             }
             //Listar subtarefas
@@ -405,21 +437,41 @@ class HomeController extends Controller {
                 $desc = trim($_GET["desc"]);
                 $id = trim($_GET["id"]);
 
-                $task = new SubTask();
-                $project = $task->get( $id );
-                
-                $status = $project[0]['status'];
-                
-                $this->listSubTasks($id);
-                $this->data["seeDetails"] = true;
-                $this->data["productDetails"] = [
+                $nameIsValid = $this->validateFunction( $name !== "" && strlen($name) <= 60 );
+                $descIsValid = $this->validateFunction( strlen($desc) <= 500 );
+                $idIsValid = $this->validateFunction( $id !== "" && strlen($id) <= 60 );
 
-                    "name" => $name,
-                    "desc" => $desc,
-                    "status" => $status,
-                    "id" => $id
+                if ( $nameIsValid && $descIsValid && $idIsValid ) {
 
-                ];
+                    $subTask = new SubTask();
+                    $subTask = $subTask->get( $id );
+
+                    if ( count($subTask) > 0 ) {
+
+                        
+                        
+                        $status = $subTask[0]['status'];
+                        
+                        $this->listSubTasks($id);
+                        $this->data["seeDetails"] = true;
+                        $this->data["productDetails"] = [
+
+                            "name" => $name,
+                            "desc" => $desc,
+                            "status" => $status,
+                            "id" => $id
+
+                        ];
+
+                    } else {
+
+                        $this->data["alert"] = "Algo deu errado ;(";
+
+                    };
+
+                };
+
+                
 
             };
             

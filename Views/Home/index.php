@@ -216,7 +216,7 @@
                                     <i class="bi bi-plus m-0 TextHighlight"></i>
 
                                 </div>
-                                <p class="SubTitle m-0"> Adicionar subtarefa</p>
+                                <p class="SubTitle m-0">Adicionar <?= !isset($_GET["tasks"]) ? 'tarefa' : 'subtarefa' ?></p>
 
                             </div>
 
@@ -268,7 +268,7 @@
 
         </section> <!--Quantidade de projetos-->
 
-        <div class="<?= isset($alert) ? 'd-flex' : 'd-none' ?> alert alert-warning" role="alert">
+        <div class="<?= isset($alert) ? 'd-flex' : 'd-none' ?> mt-4 alert alert-warning" role="alert">
 
             <?= $alert ?>
 
@@ -395,7 +395,7 @@
                     <i class="bi bi-plus m-0 TextHighlight"></i>
 
                 </div>
-                <p class="SubTitle m-0"> Adicionar tarefa</p>
+                <p class="SubTitle m-0"> Adicionar projeto</p>
 
             </div>
 
